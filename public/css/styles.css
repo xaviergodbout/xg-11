@@ -14,6 +14,7 @@
     --spacing-sm: 0.9375rem;      /* 15px */
     --spacing-md: 1.5625rem;      /* 25px */
     --spacing-lg: 2.5rem;         /* 40px */
+    --spacing-xxl: 10rem;         /* 40px */
     --max-width-page: 75rem;      /* 1200px */
     --max-width-list: 56.25rem;   /* 900px */
     --max-width-link: 50rem;      /* 800px */
@@ -80,6 +81,7 @@
 
     h2 {
     padding-bottom: var(--spacing-xs);
+    margin-top: var(--spacing-lg);
     }
 
     ol, ul {
@@ -256,13 +258,7 @@
     }
 
     section.links {
-    padding-top: 12.5rem;
-    }
-
-    @media (min-width: 53.125rem) { /* 850px */
-    section.links {
-        padding-top: 12.5rem;
-    }
+    padding-top: var(--spacing-xxl);
     }
 
     @media (min-width: 58.125rem) { /* 930px */
