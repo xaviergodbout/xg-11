@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link id="favicon" rel="icon" type="image/svg+xml" href="/img/x-g_favicon_light.svg">
+    <meta name="description" content="Personal Link Index">
+    <!-- Open Graph tags for Facebook, LinkedIn, etc. -->
+    <meta property="og:title" content="x-g.ca | Link Index" />
+    <meta property="og:description" content="x-g.ca | Link Index" />
+    <meta property="og:image" content="https://x-g.ca/img/rs_banner.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://x-g.ca/" />
+    <meta property="og:type" content="website" />
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="x-g.ca | Link Index" />
+    <meta name="twitter:description" content="x-g.ca | Link Index" />
+    <meta name="twitter:image" content="https://x-g.ca/img/rs_banner.webp" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/script.js"></script> 
+</head>
+
+<body>
+    {% include "header.njk" %}
+    {{ content | safe }}
+    {% include "footer.njk" %}
+</body>
+
+</html>
