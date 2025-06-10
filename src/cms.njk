@@ -1,0 +1,169 @@
+---
+layout: base.njk
+title: x-g.ca | cms
+cms: true
+---
+
+<style>
+    .output {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+    .preview {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .preview img {
+      width: 32px;
+      height: 32px;
+    }
+    label {
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            padding: 10px 20px;
+            background-color: #2C2C2C;
+            border: 1px solid #444444;
+            color: #fff;
+            border-radius: 8px;
+            font-family: 'Azeret Mono', monospace;
+            font-size: 16px;
+            height: 19px;
+
+            width: auto;
+            max-width: 800px;
+            box-sizing: unset;
+        }
+
+        html.light-theme input {
+            background-color: #dbdad2;
+            border: 1px solid #b9b9b4;
+            color: black;
+        }
+
+        button {
+        background-color: #2C2C2C;
+        font-family: 'Azeret Mono', monospace;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+          display: inline-block;
+          padding: 20px 30px;
+          cursor: pointer;
+          border: 2px solid transparent;
+          transition: all 0.3s ease-in-out; /* Ensures smooth transition for background and borders */
+          border-radius: 10px;
+      }
+      button:not(.logo):hover { border: 2px solid #444444; }
+
+      button svg, button svg{
+            margin-right: 10px;
+            fill: #5e6d09;
+            transition: all .3s ease-in-out;
+        }
+
+        section.cms {
+            padding-top: 200px;
+        }
+    h2 {
+        margin-bottom: 30px;
+    }
+
+    input {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+
+    #imageInput {
+        padding-bottom: 20px;
+    }
+
+    .check {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .check input {
+        width: auto;
+        margin: 0;
+    }
+</style>
+
+<section class="cms">
+    <h2>/cms</h2>
+    
+    <label>PNG File:
+    <input type="file" id="imageInput" accept="image/png">
+    </label>
+    
+    <label>URL:
+    <input type="text" id="urlInput">
+    </label>
+    
+    <label>Name:
+    <input type="text" id="nameInput">
+    </label>
+    
+    <label>Description:
+    <input type="text" id="descInput">
+    </label>
+    
+    <label class="check">
+    <input type="checkbox" id="downloadCheckbox"> Mark as download link
+    </label>
+    
+    <button onclick="generateLink()">Generate</button>
+    
+    <div class="output" id="output"></div>
+</section>
+
+<script>
+    let resizedDataURL = '';
+
+    document.getElementById('imageInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = 32;
+          canvas.height = 32;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, 32, 32);
+          resizedDataURL = canvas.toDataURL('image/png');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function generateLink() {
+      const url = document.getElementById('urlInput').value;
+      const name = document.getElementById('nameInput').value;
+      const desc = document.getElementById('descInput').value;
+      const isDownload = document.getElementById('downloadCheckbox').checked;
+
+      if (!url || !name || !desc || !resizedDataURL) {
+        alert('Please fill out all fields and upload an image.');
+        return;
+      }
+
+      const displayName = isDownload ? `↓ ${name}` : name;
+
+      const html = `<a href="${url}" class="links" target="_blank"><li><img src="${resizedDataURL}" alt="${name} Icon"><span>${displayName}</span><p>${desc}</p></li></a>`;
+
+      document.getElementById('output').textContent = html;
+    }
+  </script>
