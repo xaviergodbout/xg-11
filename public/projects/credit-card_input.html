@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Credit Card Input - Bad UI Cup</title>
+<link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAMAAAC5KTl3AAAAw1BMVEUAAABVVf/5+fn29vZQUP/09PVSUv9TU//19fVTU//19fb19fbv7+9SUv9RUf9TU/9SUv9UVP/09PX09PZTU//29vb09PT///9SUv/09PVSUv/19fVSUv/09PRTU//29vZTU/9SUv/09PT19fWtrebz8/P09PTz8/PCwulRUf9TU//09PWnp6doaOnq6uvg4OGurq5zc965ubqdnbJiYvDm5uZYWPnX19h9fdPFxcaLi8WUlLvw8PDOzs5YWPp4eNiioqyrz123AAAAKnRSTlMAIB8/EO+f35/v348QXz+/f0DPv69fUBDf349/z79vb1AwMK+PgHBvUE/1qa8DAAAB8klEQVRYw52V51rCQBBFJ5AlBRIQKYK9624ARVCK7f2fStTAANsme/7nMHPvfAuQ6XbBmW65etgTK1jz+vwKClMOmdgmbpeKfX8oJOJbuqNbFUriNlFwFQsdVdoGTOhpEjbpCCOxVVFiwkyzZhHEwkZoNoTCzp1J0BYEmGmPWFAIXUdA9H1It1z0sEoCcUviXFApW5ZwX4ORDU21oCboqA0P09F06Nqnf1YJ+CD7ZTwfvReO8qDOV6wMa+YjogG/zw3IeEg2+C2+ZpJt80E0XAZ8w2u2w9OQkuRFxLf43lNM7W1e8B0WGVVxmgu8aNfwlWXERaq5ADPAIPYU78YgK3yfpaSYKwW9/A64xCCTGBmeuYDLvEiGsbJLHMFtiGP4o8VVLAhD9Gr/RXAlr/IeUqMd+CPhaiaS4UPaAatU8mxeA5/IE05VPGn+r7ieyYs+iGN8FrhJsdT0yfIQsQr9JttjvG02qAHVgA40sLAMQDEgg8VyY2Cn9/j7mIOdz8HzbDa76ZRAQcTJpKCkTjf4akOfLDgCNQdkQwsQtyASnaHhHANeBI0KaKnQDJ7e4EWOIyBnlCo9MFF3LALxA5ugARa8wDkEVLgKUHHisALxNo9SoOIpK+n7UIB0/zyjhgcF8ZLW5kKDfuqDE36aJsnjJfHrH8Fys3xap1e3AAAAAElFTkSuQmCC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Light mode spin colors */
+    --spin-color1: #f7f7f7;
+    --spin-color2: #e5e5e5;
+  }
+
+  body.dark-theme {
+    /* Dark mode spin colors */
+    --spin-color1: #2c2c2c;
+    --spin-color2: #3c3c3c;
+  }
+
+  body {
+    font-family: 'Azeret Mono', monospace;
+    padding: 40px;
+    background: #fff;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+    display: flex;
+    justify-content: center;
+  }
+
+  .wrapper {
+        width: 100%;
+        max-width: 1200px;
+    }
+
+  body.dark-theme {
+    background: #1e1e1e;
+    color: #f7f7f7;
+  }
+
+  .card-input-container {
+    /* max-width: 700px; */
+    width: 100%;
+  }
+
+  .card-label {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 1.25em;
+  }
+
+  h2.card-label {
+    margin-top: 40px;
+  }
+
+  .card-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .digit-input, .month-input {
+    width: 48px;
+    height: 64px;
+    text-align: center;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: #f7f7f7;
+    box-shadow: inset 0 0 0 1px #eee;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.3s;
+    cursor: pointer;
+  }
+
+  .month-input {
+    width: 250px;
+    text-align: left;
+    padding-left: 20px;
+    margin-right: 20px;
+  }
+
+  body.dark-theme .digit-input, body.dark-theme .month-input {
+    background: #2c2c2c;
+    box-shadow: inset 0 0 0 1px #3c3c3c;
+    color: #f7f7f7;
+  }
+
+  .digit-input.active, .month-input.active {
+    box-shadow: 0 0 0 2px #4a56e2 !important;
+    background: #fff;
+  }
+
+  body.dark-theme .digit-input.active, body.dark-theme .month-input.active {
+    background: #1e1e1e;
+  }
+
+  .digit-input:focus, .month-input:focus {
+    outline: none;
+  }
+
+  .binary-input-container {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    transition: color 0.3s;
+  }
+
+  .binary-input-container label {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: #555;
+  }
+
+  body.dark-theme .binary-input-container label {
+    color: #ddd;
+  }
+
+  #binary-input {
+    width: 250px;
+    height: 40px;
+    padding: 8px 12px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    background: #f7f7f7;
+    transition: border-color 0.2s ease, background 0.3s;
+  }
+
+  body.dark-theme #binary-input {
+    background: #2c2c2c;
+    border-color: #3c3c3c;
+    color: #f7f7f7;
+  }
+
+  #binary-input:focus {
+    border-color: #4a56e2;
+    background: #fff;
+  }
+
+  body.dark-theme #binary-input:focus {
+    background: #1e1e1e;
+  }
+
+  /* Year input section */
+  .year-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: #555;
+  }
+
+  body.dark-theme .year-label {
+    color: #ddd;
+  }
+
+  .year-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .spin-button {
+    display: none;
+    padding: 8px 16px;
+    background: #f7f7f7;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s ease;
+    user-select: none;
+  }
+
+  body.dark-theme .spin-button {
+    background: #2c2c2c;
+    border-color: #3c3c3c;
+    color: #f7f7f7;
+  }
+
+  .spin-button:hover {
+    background: #eee;
+  }
+
+  body.dark-theme .spin-button:hover {
+    background: #3c3c3c;
+  }
+
+  @keyframes spin {
+    0% { background: var(--spin-color1); }
+    50% { background: var(--spin-color2); }
+    100% { background: var(--spin-color1); }
+  }
+
+  .spinning {
+    animation: spin 0.1s infinite;
+  }
+
+  .month-picker-container {
+    max-width: 700px;
+    position: relative;
+  }
+
+  .month-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    font-weight: 500;
+    color: #555;
+  }
+
+  body.dark-theme .month-label {
+    color: #ddd;
+  }
+
+  .scrolling-container {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 700px;
+    height: 50px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 0 20px;
+  }
+
+  body.dark-theme .scrolling-container {
+    background: #1e1e1e;
+    border-color: #3c3c3c;
+    box-shadow: none;
+  }
+
+  .months {
+    display: flex;
+    gap: 40px;
+    white-space: nowrap;
+  }
+
+  .month-item {
+    display: inline-block;
+    font-size: 1em;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    color: #333;
+  }
+
+  body.dark-theme .month-item {
+    color: #f7f7f7;
+  }
+
+  .month-item:hover {
+    background: #e5e5e5;
+  }
+
+  body.dark-theme .month-item:hover {
+    background: #3c3c3c;
+  }
+
+  .date_container {
+    display: flex;
+  }
+
+  /* Simple Dark/Light Theme Toggle */
+  .theme-toggle-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  .theme-toggle {
+    width: 60px;
+    height: 30px;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: #ddd;
+    transition: background 0.3s;
+  }
+
+  body.dark-theme .theme-toggle {
+    background: #2c2c2c;
+  }
+
+  .toggle-handle {
+    width: 24px;
+    height: 24px;
+    background: #333;
+    border-radius: 24px;
+    position: absolute;
+    left: 3px;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  body.dark-theme .toggle-handle {
+    background: #f7f7f7;
+  }
+
+  body.dark-theme .theme-toggle.active .toggle-handle {
+    transform: translateX(30px);
+  }
+
+  .theme-toggle.active .toggle-handle {
+    transform: translateX(30px);
+  }
+
+  footer {
+        border-top: #2C2C2C 1px solid;
+        margin-top: 120px;
+        padding-top: 10px;
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo_footer svg {
+        fill: #2C2C2C;
+        width: 40px;
+    }
+
+    footer p, footer span {
+        color: #2C2C2C;
+        padding-bottom: 60px;
+    }
+
+    .credit-icon_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+</style>
+</head>
+<body class="dark-theme">
+  <div class="wrapper">
+      <div class="theme-toggle-container">
+        <div class="theme-toggle active" id="theme-toggle">
+          <div class="toggle-handle"></div>
+        </div>
+      </div>
+    <h1>Credit from Hell 🔥</h1>
+      <div class="card-input-container">
+        <label for="card-inputs" class="card-label">Credit Card Number</label>
+        <div class="card-inputs" id="card-inputs">
+          <!-- 16 separate inputs for the card number -->
+          <input type="text" class="digit-input" maxlength="1" data-index="0" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="1" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="2" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="3" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="4" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="5" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="6" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="7" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="8" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="9" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="10" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="11" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="12" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="13" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="14" readonly>
+          <input type="text" class="digit-input" maxlength="1" data-index="15" readonly>
+        </div>
+      
+        <!-- Binary input field for card digits -->
+        <div class="binary-input-container" id="binary-input-container">
+          <label for="binary-input">Enter the digit in binary</label>
+          <input type="text" id="binary-input" maxlength="4" pattern="[0-1]*" placeholder="e.g. 0101">
+        </div>
+        <h2 class="card-label">Expiration date</h2>
+        <!-- Month input section -->
+        <div class="credit-icon_container">
+            <div class="date_container">
+                <div class="month-picker-container">
+                    <label class="month-label">Month</label>
+                    <input type="text" class="month-input" readonly placeholder="Select month">
+                    <div class="scrolling-container" style="display:none;">
+                      <div class="months"></div>
+                    </div>
+                </div>
+                <!-- Year input section -->
+                <div class="year-section">
+                  <div class="year-label">Year</div>
+                  <div class="year-inputs">
+                    <input type="text" class="digit-input year-digit" maxlength="1" data-year-index="0" readonly>
+                    <input type="text" class="digit-input year-digit" maxlength="1" data-year-index="1" readonly>
+                    <button class="spin-button" id="spin-button">Spin</button>
+                  </div>
+                </div>
+            </div>
+            <svg width="148" height="25" viewBox="0 0 148 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="0.62793" width="34" height="23" rx="3.5" fill="white" stroke="#D9D9D9"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.1253 16.3862H9.00494L7.41495 10.3203C7.33949 10.0413 7.17925 9.7946 6.94354 9.67833C6.35531 9.38616 5.70712 9.15363 5 9.03636V8.80282H8.41567C8.88708 8.80282 9.24064 9.15363 9.29957 9.56106L10.1245 13.9366L12.2438 8.80282H14.3052L11.1253 16.3862ZM15.4838 16.3862H13.4813L15.1302 8.80282H17.1327L15.4838 16.3862ZM19.7234 10.9036C19.7823 10.4952 20.1359 10.2617 20.5483 10.2617C21.1965 10.203 21.9026 10.3203 22.4919 10.6115L22.8454 8.97874C22.2562 8.7452 21.608 8.62793 21.0198 8.62793C19.0762 8.62793 17.662 9.67834 17.662 11.1362C17.662 12.2452 18.6637 12.8275 19.3708 13.1783C20.1359 13.5281 20.4305 13.7617 20.3716 14.1115C20.3716 14.6362 19.7823 14.8697 19.1941 14.8697C18.4869 14.8697 17.7798 14.6948 17.1327 14.4026L16.7791 16.0364C17.4862 16.3275 18.2512 16.4448 18.9584 16.4448C21.1376 16.5024 22.4919 15.453 22.4919 13.8779C22.4919 11.8944 19.7234 11.7781 19.7234 10.9036V10.9036ZM29.5 16.3862L27.91 8.80282H26.2022C25.8486 8.80282 25.4951 9.03636 25.3772 9.38616L22.4329 16.3862H24.4943L24.9058 15.2781H27.4386L27.6743 16.3862H29.5ZM26.4968 10.845L27.085 13.703H25.4361L26.4968 10.845Z" fill="#172B85"/>
+                <rect x="76" y="0.53125" width="34" height="23" rx="3.5" fill="#1F72CD" stroke="#D9D9D9"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M82.1811 8.53125L79 15.778H82.8082L83.2803 14.6226H84.3595L84.8316 15.778H89.0234V14.8961L89.3969 15.778H91.5652L91.9387 14.8775V15.778H100.657L101.717 14.6526L102.709 15.778L107.187 15.7873L103.996 12.1749L107.187 8.53125H102.779L101.747 9.63588L100.785 8.53125H91.3016L90.4872 10.4017L89.6537 8.53125H85.8534V9.38311L85.4307 8.53125H82.1811ZM95.1994 9.5603H100.206L101.737 11.2629L103.317 9.5603H104.848L102.522 12.1738L104.848 14.7572H103.248L101.717 13.0349L100.128 14.7572H95.1994V9.5603ZM96.4356 11.5862V10.637V10.636H99.5593L100.922 12.1542L99.4989 13.6806H96.4356V12.6442H99.1667V11.5862H96.4356ZM82.918 9.5603H84.7743L86.8843 14.4744V9.5603H88.9178L90.5476 13.0837L92.0496 9.5603H94.073V14.7603H92.8418L92.8317 10.6856L91.0368 14.7603H89.9355L88.1305 10.6856V14.7603H85.5977L85.1176 13.5945H82.5234L82.0442 14.7593H80.6872L82.918 9.5603ZM82.9663 12.5168L83.821 10.4401L84.6747 12.5168H82.9663Z" fill="white"/>
+                <rect x="113.5" y="0.53125" width="34" height="23" rx="3.5" fill="white" stroke="#D9D9D9"/>
+                <path d="M128 23.0312L147 17.2812V20.0312C147 21.6881 145.657 23.0312 144 23.0312H128Z" fill="#FD6020"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M143.394 9.14209C144.439 9.14209 145.014 9.62563 145.014 10.539C145.066 11.2374 144.596 11.8284 143.969 11.9359L145.38 13.9238H144.282L143.08 11.9896H142.976V13.9238H142.087V9.14209H143.394ZM142.976 11.3449H143.237C143.812 11.3449 144.073 11.0763 144.073 10.5927C144.073 10.1629 143.812 9.89429 143.237 9.89429H142.976V11.3449ZM139.003 13.9238H141.512V13.1179H139.892V11.8284H141.46V11.0225H139.892V9.94799H141.512V9.14209H139.003V13.9238V13.9238ZM136.39 12.3657L135.188 9.14209H134.247L136.181 14.0312H136.652L138.585 9.14209H137.645L136.39 12.3657V12.3657ZM125.78 11.5598C125.78 12.903 126.826 14.0313 128.132 14.0313C128.551 14.0313 128.916 13.9238 129.282 13.7626V12.6881C129.021 13.0104 128.655 13.2253 128.237 13.2253C127.401 13.2253 126.721 12.5806 126.721 11.721V11.6135C126.669 10.7539 127.348 10.0017 128.185 9.948C128.603 9.948 129.021 10.1629 129.282 10.4853V9.41073C128.969 9.19583 128.551 9.1421 128.185 9.1421C126.826 9.03465 125.78 10.1629 125.78 11.5598V11.5598ZM124.16 10.9688C123.638 10.7539 123.481 10.6465 123.481 10.3778C123.533 10.0555 123.794 9.78682 124.108 9.84055C124.369 9.84055 124.631 10.0017 124.84 10.2166L125.31 9.57191C124.944 9.24955 124.474 9.03464 124.003 9.03464C123.272 8.98092 122.645 9.57191 122.592 10.3241V10.3778C122.592 11.0225 122.854 11.3986 123.69 11.6673C123.899 11.721 124.108 11.8284 124.317 11.9359C124.474 12.0434 124.578 12.2045 124.578 12.4194C124.578 12.7955 124.265 13.1179 123.951 13.1179H123.899C123.481 13.1179 123.115 12.8493 122.958 12.4732L122.383 13.0642C122.697 13.6552 123.324 13.9775 123.951 13.9775C124.787 14.0313 125.467 13.3865 125.519 12.5269V12.3657C125.467 11.721 125.206 11.3986 124.16 10.9688V10.9688ZM121.129 13.9238H122.017V9.14209H121.129V13.9238V13.9238ZM117 9.14211H118.307H118.568C119.822 9.19583 120.815 10.2704 120.763 11.5598C120.763 12.2583 120.449 12.903 119.927 13.3865C119.456 13.7626 118.882 13.9775 118.307 13.9238H117V9.14211ZM118.15 13.1179C118.568 13.1716 119.038 13.0104 119.352 12.7418C119.666 12.4194 119.822 11.9896 119.822 11.5061C119.822 11.0763 119.666 10.6464 119.352 10.3241C119.038 10.0554 118.568 9.89427 118.15 9.94799H117.889V13.1179H118.15Z" fill="black"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M131.948 9.03125C130.641 9.03125 129.543 10.1058 129.543 11.5027C129.543 12.8459 130.589 13.9741 131.948 14.0279C133.307 14.0816 134.352 12.9533 134.404 11.5564C134.352 10.1595 133.307 9.03125 131.948 9.03125V9.03125Z" fill="#FD6020"/>
+                <rect x="38.5" y="0.62793" width="34" height="23" rx="3.5" fill="white" stroke="#D9D9D9"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M55.75 17.2849C54.5584 18.3131 53.0128 18.9339 51.3238 18.9339C47.5551 18.9339 44.5 15.8433 44.5 12.0309C44.5 8.2185 47.5551 5.12793 51.3238 5.12793C53.0128 5.12793 54.5584 5.74868 55.75 6.77696C56.9416 5.74868 58.4872 5.12793 60.1762 5.12793C63.9449 5.12793 67 8.2185 67 12.0309C67 15.8433 63.9449 18.9339 60.1762 18.9339C58.4872 18.9339 56.9416 18.3131 55.75 17.2849Z" fill="#ED0006"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M55.75 17.2849C57.2172 16.0187 58.1475 14.1347 58.1475 12.0309C58.1475 9.9271 57.2172 8.0431 55.75 6.77696C56.9416 5.74868 58.4872 5.12793 60.1762 5.12793C63.9449 5.12793 67 8.2185 67 12.0309C67 15.8433 63.9449 18.9339 60.1762 18.9339C58.4872 18.9339 56.9416 18.3131 55.75 17.2849Z" fill="#F9A000"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M55.75 6.77686C57.2172 8.04299 58.1476 9.92698 58.1476 12.0308C58.1476 14.1346 57.2172 16.0186 55.75 17.2847C54.2829 16.0186 53.3525 14.1346 53.3525 12.0308C53.3525 9.92698 54.2829 8.04299 55.75 6.77686Z" fill="#FF5E00"/>
+                </svg>
+        </div>
+      </div>
+      <footer>
+        <a href="" class="logo_footer"><svg viewBox="0 0 97 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M88.8226 11.5891V7.4121H96.8345V28.9933C96.7928 38.4939 91.4932 42.3842 81.228 42.3842C74.5097 42.3842 68.7094 41.3605 64.2445 40.3367L65.1625 34.2759C70.1282 35.2588 74.7601 36.0368 79.5171 36.0368C85.7764 36.0368 88.8226 34.235 88.8226 28.8295V26.9867C86.3189 30.4266 81.9374 31.9827 76.8048 31.9827C69.5857 31.9827 62.3667 28.5428 62.3667 19.2879C62.3667 10.033 69.5857 6.59308 76.8048 6.59308C81.9374 6.59308 86.3189 8.14922 88.8226 11.5891ZM79.8092 25.3486C86.0268 25.3486 88.8226 23.1373 88.8226 19.2879C88.8226 15.4794 86.0268 13.2271 79.8092 13.2271C73.5917 13.2271 70.7959 15.4794 70.7959 19.2879C70.7959 23.1373 73.5917 25.3486 79.8092 25.3486Z"/>
+            <path d="M35.3597 31.737H24.4685L37.9886 19.5746L24.4685 7.41211H35.3597L43.2881 15.2337L51.2165 7.41211H62.1077L48.5876 19.5746L62.1077 31.737H51.2165L43.2881 23.9154L35.3597 31.737Z"/>
+            <path d="M11.5588 0H19.362L7.80324 37.8797H0L11.5588 0Z"/>
+            </svg>
+        </a>
+        <p>© Copyright <span id="currentYear"></span>, Xavier Godbout</p>
+      </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let isSpinningYear = false;
+
+      const digitInputs = document.querySelectorAll('.digit-input:not(.year-digit)');
+      const binaryInputContainer = document.getElementById('binary-input-container');
+      const binaryInput = document.getElementById('binary-input');
+      const yearDigits = document.querySelectorAll('.year-digit');
+      const spinButton = document.getElementById('spin-button');
+
+      let currentIndex = null;      // For card digits
+      let currentYearIndex = null;  // For year digits
+      let spinInterval = null;
+
+      let activeElementType = null; // 'card' or 'year'
+      let activeElement = null;     // the active digit input
+
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-theme');
+        themeToggle.classList.toggle('active');
+      });
+
+      function clearActiveState() {
+        document.querySelectorAll('.digit-input').forEach(d => d.classList.remove('active'));
+        activeElementType = null;
+        activeElement = null;
+        currentIndex = null;
+        currentYearIndex = null;
+        spinButton.style.display = 'none';
+        binaryInputContainer.style.display = 'none';
+      }
+
+      function setActiveDigit(digitInput, type) {
+        clearActiveState();
+        digitInput.classList.add('active');
+        activeElementType = type;
+        activeElement = digitInput;
+
+        if (type === 'card') {
+          binaryInputContainer.style.display = 'flex';
+        }
+
+        if (type === 'year' && !isSpinningYear) {
+          spinButton.style.display = 'inline-block';
+        }
+      }
+
+      // Card digits logic
+      digitInputs.forEach(input => {
+        input.addEventListener('click', (e) => {
+          if (isSpinningYear) return;
+          const index = parseInt(e.target.getAttribute('data-index'), 10);
+          setActiveDigit(e.target, 'card');
+          currentIndex = index;
+          binaryInput.value = '';
+          binaryInput.focus();
+        });
+      });
+
+      binaryInput.addEventListener('input', () => {
+        binaryInput.value = binaryInput.value.replace(/[^01]/g, '');
+      });
+
+      binaryInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          validateAndSetDigit();
+        }
+      });
+
+      function validateAndSetDigit() {
+        if (activeElementType !== 'card' || currentIndex === null) return;
+        const binaryValue = binaryInput.value.trim();
+
+        if (binaryValue.match(/^[0-1]{1,4}$/)) {
+          const decimal = parseInt(binaryValue, 2);
+          if (decimal >= 0 && decimal <= 9) {
+            digitInputs[currentIndex].value = decimal.toString();
+            clearActiveState();
+          } else {
+            alert('Binary must represent a decimal digit from 0 to 9.');
+          }
+        } else if (binaryValue.length > 0) {
+          alert('Please enter only binary digits (0 or 1), up to 4 bits.');
+        }
+      }
+
+      // Year digits logic
+      yearDigits.forEach(digit => {
+        digit.addEventListener('click', (e) => {
+          if (isSpinningYear) return;
+          const index = parseInt(e.target.getAttribute('data-year-index'), 10);
+          setActiveDigit(e.target, 'year');
+          currentYearIndex = index;
+        });
+      });
+
+      spinButton.addEventListener('click', () => {
+        if (activeElementType !== 'year' || currentYearIndex === null) return;
+        startSpinningAnimation();
+        isSpinningYear = true;
+
+        spinButton.style.display = 'none';
+
+        let counter = 0;
+        spinInterval = setInterval(() => {
+          const randomDigit = Math.floor(Math.random() * 10);
+          yearDigits[currentYearIndex].value = randomDigit;
+          counter++;
+          if (counter > 15) {
+            clearInterval(spinInterval);
+            stopSpinningAnimation();
+            isSpinningYear = false;
+            if (activeElementType === 'year') {
+              spinButton.style.display = 'inline-block';
+            }
+          }
+        }, 100);
+      });
+
+      function startSpinningAnimation() {
+        yearDigits[currentYearIndex].classList.add('spinning');
+      }
+
+      function stopSpinningAnimation() {
+        yearDigits[currentYearIndex].classList.remove('spinning');
+      }
+
+      document.addEventListener('mousedown', (e) => {
+        if (activeElementType === null) return;
+
+        let allowedElements = [];
+        if (activeElementType === 'card') {
+          allowedElements.push(activeElement);
+          allowedElements.push(binaryInputContainer);
+          allowedElements.push(binaryInput);
+        } else if (activeElementType === 'year') {
+          allowedElements.push(activeElement);
+          allowedElements.push(spinButton);
+        }
+
+        const clickedInsideAllowed = allowedElements.some(el => el && (el === e.target || el.contains(e.target)));
+        if (!clickedInsideAllowed) {
+          if (!isSpinningYear) {
+            clearActiveState();
+          }
+        }
+      });
+
+      // Month picker logic
+      const monthInput = document.querySelector('.month-input');
+      const scrollingContainer = document.querySelector('.scrolling-container');
+      const monthsWrapper = document.querySelector('.months');
+
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+
+      const repeatCount = 10;
+      for (let i = 0; i < repeatCount; i++) {
+        for (const m of months) {
+          const mItem = document.createElement('div');
+          mItem.className = "month-item";
+          mItem.textContent = m;
+          mItem.addEventListener('click', () => {
+            monthInput.value = m;
+            hideScrollingContainer();
+          });
+          monthsWrapper.appendChild(mItem);
+        }
+      }
+
+      let scrollLeft = 0;
+      let scrollSpeed = 18;
+      let intervalId = null;
+
+      function startScrolling() {
+        if (intervalId) return;
+        intervalId = setInterval(() => {
+          scrollLeft += scrollSpeed;
+          if (scrollLeft > monthsWrapper.scrollWidth / 2) {
+            scrollLeft = 0;
+          }
+          monthsWrapper.style.transform = `translateX(${-scrollLeft}px)`;
+        }, 30);
+      }
+
+      function stopScrolling() {
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+      }
+
+      function showScrollingContainer() {
+        monthInput.classList.add('active');
+        scrollingContainer.style.display = 'flex';
+        startScrolling();
+      }
+
+      function hideScrollingContainer() {
+        monthInput.classList.remove('active');
+        scrollingContainer.style.display = 'none';
+        stopScrolling();
+      }
+
+      monthInput.addEventListener('click', () => {
+        showScrollingContainer();
+      });
+
+      document.addEventListener('mousedown', (e) => {
+        if (e.target === monthInput || scrollingContainer.contains(e.target)) {
+          return;
+        }
+        hideScrollingContainer();
+      });
+    });
+  </script>
+</body>
+</html>

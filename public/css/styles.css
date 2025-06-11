@@ -188,8 +188,15 @@
     footer p,
     footer span {
     color: var(--color-link-dark);
-    padding-bottom: 3.75rem;
     font-size: var(--font-size-small);
+    }
+
+    footer p {
+        padding-bottom: 3.75rem;
+    }
+
+    footer a {
+        width: auto!important;
     }
 
     .logo_footer svg {
