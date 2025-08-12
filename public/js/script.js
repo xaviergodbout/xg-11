@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch((registrationError) => {
           console.log('SW registration failed: ', registrationError);
+          // Continue without service worker
         });
     });
   }
