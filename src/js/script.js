@@ -1,6 +1,90 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+  // Service Worker Registration for PWA
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then((registration) => {
+          console.log('SW registered: ', registration);
+        })
+        .catch((registrationError) => {
+          console.log('SW registration failed: ', registrationError);
+        });
+    });
+  }
+
+  // PWA Install Button
+  let deferredPrompt;
+  let installButton = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    // Show install button
+    showInstallButton();
+  });
+
+  function showInstallButton() {
+    if (!installButton) {
+      installButton = document.createElement('button');
+      installButton.innerHTML = '📱 Install App';
+      installButton.id = 'install-button';
+      installButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #00ff88;
+        color: #1a1a1a;
+        border: none;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-family: 'Azeret Mono', monospace;
+        font-weight: 600;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+        transition: all 0.3s ease;
+      `;
+      
+      installButton.addEventListener('mouseover', () => {
+        installButton.style.transform = 'translateY(-2px)';
+        installButton.style.boxShadow = '0 6px 16px rgba(0, 255, 136, 0.4)';
+      });
+      
+      installButton.addEventListener('mouseout', () => {
+        installButton.style.transform = 'translateY(0)';
+        installButton.style.boxShadow = '0 4px 12px rgba(0, 255, 136, 0.3)';
+      });
+
+      installButton.addEventListener('click', () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the install prompt');
+            } else {
+              console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+            installButton.style.display = 'none';
+          });
+        }
+      });
+
+      document.body.appendChild(installButton);
+    }
+  }
+
+  window.addEventListener('appinstalled', (evt) => {
+    console.log('PWA was installed');
+    if (installButton) {
+      installButton.style.display = 'none';
+    }
+  });
+
 
   
 

@@ -1,0 +1,63 @@
+{
+  "name": "x-g.ca | Link Index",
+  "short_name": "x-g.ca",
+  "description": "Personal Link Index - Easy access to all your favorite services and tools",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#00ff88",
+  "orientation": "portrait-primary",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/img/x-g_favicon_light.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/img/x-g_favicon_light.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/img/x-g_favicon_light.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/img/x-g_favicon_light.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Link Index",
+      "short_name": "Links",
+      "description": "View all available links",
+      "url": "/#links",
+      "icons": [
+        {
+          "src": "/img/x-g_favicon_light.svg",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Games",
+      "short_name": "Games",
+      "description": "Access game downloads and servers",
+      "url": "/#downloads",
+      "icons": [
+        {
+          "src": "/img/x-g_favicon_light.svg",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}

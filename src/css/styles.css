@@ -305,3 +305,77 @@
         padding-top: var(--spacing-xs);
     }
 }
+
+/* PWA Specific Styles */
+#install-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00ff88;
+    color: #1a1a1a;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+    transition: all 0.3s ease;
+    font-size: var(--font-size-small);
+    display: none;
+}
+
+#install-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 255, 136, 0.4);
+}
+
+#install-button:active {
+    transform: translateY(0);
+}
+
+/* PWA Display Mode Adjustments */
+@media all and (display-mode: standalone) {
+    /* Hide elements that are not needed in standalone mode */
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    /* Add status bar styling for iOS */
+    html.light-theme {
+        background-color: var(--color-bg-light);
+    }
+    
+    html.dark-theme {
+        background-color: var(--color-bg-dark);
+    }
+}
+
+/* iOS PWA specific adjustments */
+@media all and (display-mode: standalone) and (-webkit-touch-callout: none) {
+    body {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* Android PWA specific adjustments */
+@media all and (display-mode: standalone) and (orientation: portrait) {
+    body {
+        user-select: none;
+    }
+}
+
+/* Responsive adjustments for mobile PWA */
+@media (max-width: 48rem) {
+    #install-button {
+        bottom: 16px;
+        right: 16px;
+        padding: 10px 14px;
+        font-size: 0.65rem;
+    }
+}
