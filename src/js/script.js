@@ -164,5 +164,78 @@ document.querySelectorAll('section.links').forEach(section => {
   });
 });
 
+
+
+
+
+// View Toggle Functionality
+const listViewBtn = document.getElementById('list-view-btn');
+const galleryViewBtn = document.getElementById('gallery-view-btn');
+const linksSection = document.querySelector('section.links');
+
+// Debug logging
+console.log('View toggle elements found:', {
+  listViewBtn: !!listViewBtn,
+  galleryViewBtn: !!galleryViewBtn,
+  linksSection: !!linksSection
 });
 
+// Set initial view (list view is default)
+let currentView = 'list';
+if (listViewBtn) {
+  listViewBtn.classList.add('active');
+}
+
+function switchToListView() {
+  if (currentView === 'list') return;
+  
+  currentView = 'list';
+  if (linksSection) {
+    linksSection.classList.remove('gallery-view');
+  }
+  if (listViewBtn) {
+    listViewBtn.classList.add('active');
+  }
+  if (galleryViewBtn) {
+    galleryViewBtn.classList.remove('active');
+  }
+  
+  // Save preference
+  localStorage.setItem('viewPreference', 'list');
+}
+
+function switchToGalleryView() {
+  if (currentView === 'gallery') return;
+  
+  currentView = 'gallery';
+  if (linksSection) {
+    linksSection.classList.add('gallery-view');
+  }
+  if (galleryViewBtn) {
+    galleryViewBtn.classList.add('active');
+  }
+  if (listViewBtn) {
+    listViewBtn.classList.remove('active');
+  }
+  
+  // Save preference
+  localStorage.setItem('viewPreference', 'gallery');
+}
+
+// Event listeners
+if (listViewBtn) {
+  listViewBtn.addEventListener('click', switchToListView);
+}
+if (galleryViewBtn) {
+  galleryViewBtn.addEventListener('click', switchToGalleryView);
+}
+
+// Load saved preference or default to list view
+const savedView = localStorage.getItem('viewPreference') || 'list';
+if (savedView === 'gallery') {
+  switchToGalleryView();
+} else {
+  switchToListView();
+}
+
+});
