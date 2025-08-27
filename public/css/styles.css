@@ -146,6 +146,8 @@
     li img {
     height: var(--spacing-md);
     margin-inline-end: var(--spacing-sm);
+    aspect-ratio: 1;
+    object-fit: contain;
     }
 
     li p {
@@ -439,7 +441,7 @@ html.light-theme .view-btn.active img {
     display: none;
 }
 
-.gallery-view a {
+.gallery-view a:not(.secLink, .logo_footer, .logo) {
     width: auto;
 
     img {
