@@ -82,6 +82,7 @@
     h2 {
     padding-bottom: var(--spacing-xs);
     margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-xs);
     }
 
     ol, ul, .header-controls {
@@ -91,6 +92,12 @@
     max-width: var(--max-width-list);
     width: 100%;
     position: relative;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 
     a, span {
@@ -123,7 +130,6 @@
     padding: var(--spacing-md);
     border-radius: 0.625rem;
     border: 1px solid transparent;
-    margin-top: var(--spacing-xs);
     transition: border 0.3s ease-in-out;
     cursor: pointer;
     display: flex;
@@ -430,15 +436,16 @@ html.light-theme .view-btn.active img {
 
 /* Gallery View Styles */
 .gallery-view ul {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
     gap: var(--spacing-sm);
-    max-width: none;
 }
 
-.gallery-view li span,
-.gallery-view li p {
-    display: none;
+.gallery-view li {
+    margin-top: 0;
+    span , p {
+        display: none;
+    }
 }
 
 .gallery-view a:not(.secLink, .logo_footer, .logo) {
@@ -446,7 +453,8 @@ html.light-theme .view-btn.active img {
 
     img {
         margin-inline-end: 0;
-        aspect-ratio: 1;
+        width: 100%;
+        height: auto;
         object-fit: contain;
     }
 }
