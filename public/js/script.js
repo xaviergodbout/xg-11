@@ -174,7 +174,7 @@ document.querySelectorAll('section').forEach(section => {
         const linkCount = ul.querySelectorAll('a').length;
         // Append the count to the header text (only if > 0)
         if (linkCount > 0) {
-          header.textContent += ` (${linkCount})`;
+          header.textContent += `(${linkCount})`;
         }
       }
     });

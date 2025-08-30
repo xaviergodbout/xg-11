@@ -272,7 +272,7 @@
     height: auto;
     }
 
-    section.links {
+    section.links-container {
     padding-top: var(--spacing-xxl);
     }
 
