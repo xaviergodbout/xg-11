@@ -147,21 +147,38 @@ if (html.classList.contains('dark-theme')) {
 
 
 
-// Select all section headers and their corresponding ULs
-document.querySelectorAll('section.links').forEach(section => {
-  // For each h2 inside the section
-  section.querySelectorAll('h2').forEach(header => {
-    // The next sibling UL after this header
-    const ul = header.nextElementSibling;
-    if (ul && ul.tagName === 'UL') {
-      // Count how many <a> tags are inside this ul
-      const linkCount = ul.querySelectorAll('a').length;
-      // Append the count to the header text (only if > 0)
-      if (linkCount > 0) {
-        header.textContent += `(${linkCount})`;
+// Select all sections that contain links and count links for each h2
+document.querySelectorAll('section').forEach(section => {
+  // Only process sections that contain UL elements (indicating they have links)
+  if (section.querySelector('ul')) {
+    // For each h2 inside the section
+    section.querySelectorAll('h2').forEach(header => {
+      // Skip if count already added (prevent duplicates)
+      if (header.textContent.includes('(') && header.textContent.includes(')')) {
+        return;
       }
-    }
-  });
+      
+      // Find the UL - either as next sibling or next sibling of parent (for wrapped h2s)
+      let ul = header.nextElementSibling;
+      
+      // If h2 is wrapped in a div (like header-controls), look for UL after the parent div
+      if (!ul || ul.tagName !== 'UL') {
+        const parentElement = header.parentElement;
+        if (parentElement && parentElement !== section) {
+          ul = parentElement.nextElementSibling;
+        }
+      }
+      
+      if (ul && ul.tagName === 'UL') {
+        // Count how many <a> tags are inside this ul
+        const linkCount = ul.querySelectorAll('a').length;
+        // Append the count to the header text (only if > 0)
+        if (linkCount > 0) {
+          header.textContent += ` (${linkCount})`;
+        }
+      }
+    });
+  }
 });
 
 
