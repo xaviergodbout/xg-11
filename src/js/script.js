@@ -227,6 +227,15 @@ function switchToGalleryView() {
   currentView = 'gallery';
   if (linksSection) {
     linksSection.classList.add('gallery-view');
+    
+    // Add tooltip data attributes to list items
+    const listItems = linksSection.querySelectorAll('li');
+    listItems.forEach(li => {
+      const span = li.querySelector('span');
+      if (span && span.textContent.trim()) {
+        li.setAttribute('data-title', span.textContent.trim());
+      }
+    });
   }
   if (galleryViewBtn) {
     galleryViewBtn.classList.add('active');
@@ -254,5 +263,21 @@ if (savedView === 'gallery') {
 } else {
   switchToListView();
 }
+
+// Initialize tooltips for gallery view on page load
+function initializeGalleryTooltips() {
+  if (linksSection && linksSection.classList.contains('gallery-view')) {
+    const listItems = linksSection.querySelectorAll('li');
+    listItems.forEach(li => {
+      const span = li.querySelector('span');
+      if (span && span.textContent.trim()) {
+        li.setAttribute('data-title', span.textContent.trim());
+      }
+    });
+  }
+}
+
+// Call initialization after DOM is fully loaded
+setTimeout(initializeGalleryTooltips, 100);
 
 });
