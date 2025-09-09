@@ -227,7 +227,7 @@
     bottom: -2.5rem;
     right: 0;
     left: 0;
-    background: #333;
+    background: var(--color-link-dark);
     color: var(--color-text-light);
     padding: 0.3125rem 0.3125rem;
     border-radius: 0.375rem;
@@ -531,11 +531,11 @@ html.light-theme .view-btn.active img {
 
 /* Light theme tooltip adjustments */
 html.light-theme .gallery-view li::before {
-    background: var(--color-bg-light);
+    background: var(--color-link-light);
     color: var(--color-text-dark);
     border: 1px solid var(--color-border-light);
 }
 
 html.light-theme .gallery-view li::after {
-    border-bottom-color: var(--color-bg-light);
+    border-bottom-color: var(--color-link-light);
 }
