@@ -180,8 +180,12 @@
     const isDownload = document.getElementById('downloadCheckbox').checked;
     const displayName = isDownload ? `↓ ${name.value}` : name.value;
 
+    // Generate dynamic image filename based on the name input
+    const imageFileName = name.value.toLowerCase().replace(/\s+/g, '_') + '_icon.webp';
+    const imagePath = `img/xg_icon/${imageFileName}`;
+
     const descriptionHTML = desc.value.trim() ? `<p>${desc.value}</p>` : '';
-    const html = `<a href="${url.value}" class="links" target="_blank"><li><img src="img/xg_icon/webp-icon.webp" alt="${name.value} Icon"><span>${displayName}</span>${descriptionHTML}</li></a>`;
+    const html = `<a href="${url.value}" class="links" target="_blank"><li><img src="${imagePath}" alt="${name.value} Icon"><span>${displayName}</span>${descriptionHTML}</li></a>`;
 
     document.getElementById('output').textContent = html;
     document.getElementById('copyButton').style.display = 'inline-block';
