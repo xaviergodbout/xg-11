@@ -1,0 +1,45 @@
+---
+layout: base.njk
+title: x-g CSS Playground
+---
+
+<style>
+    .popover {
+        transition: opacity 0.3s ease, transform 0.3s ease, overlay 0.3s ease allow-discrete, display 0.3s ease allow-discrete;
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Starting style for when popover opens */
+    .popover:popover-open {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Style for when popover is closed/closing */
+    .popover:not(:popover-open) {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    /* Starting style - what the popover looks like when it first appears */
+    @starting-style {
+        .popover:popover-open {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+    }
+</style>
+
+<section class="playtest">
+    <h1>CSS Playground</h1>
+
+    <button popovertarget="popover1">Pop-over Button</button>
+
+    <div class="popover" popover id="popover1">
+        <h2>Coming Soon!</h2>
+        <p>This section is under construction. Check back later for exciting CSS experiments and demos!</p>
+        <button class="explore-button">Explore</button>
+    </div>
+
+</section>
