@@ -466,27 +466,31 @@ section.links {
     justify-content: center;
 }
 
+/* View Buttons */
 .view-btn img {
     width: 22px;
     height: 22px;
-    filter: brightness(0.3);
-    transition: filter 0.3s ease;
+    opacity: 0.35;
+    transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
+/* Hover + Active */
 .view-btn:hover img,
 .view-btn.active img {
-    filter: brightness(1);
+    opacity: 1;
 }
 
-html.light-theme .view-btn img {
-    filter: invert(1) brightness(0.7);
+/* Light theme: force icons to black */
+html.light-theme .view-btn img,
+body.light-theme .view-btn img {
+    filter: brightness(0);
 }
 
-html.light-theme .view-btn:hover img,
-html.light-theme .view-btn.active img {
-    filter: invert(1) brightness(1);
+/* Dark theme: force icons to white */
+html.dark-theme .view-btn img,
+body.dark-theme .view-btn img {
+    filter: brightness(0) invert(1);
 }
-
 /* Gallery View Styles */
 .gallery-view ul {
     display: grid;
