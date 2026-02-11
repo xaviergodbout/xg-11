@@ -272,9 +272,34 @@
     height: auto;
     }
 
-    section.links {
+section.links {
     padding-top: var(--spacing-xxl);
+    
+    /* NEW GRID LAYOUT */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns by default */
+    gap: var(--spacing-lg);                /* Spacing between columns */
+    align-items: start;                    /* Prevents columns from stretching vertically */
+}
+
+/* Make sure the lists inside fit the new columns */
+.links-container ul {
+    max-width: 100%; /* Override the global max-width to fit the grid cell */
+}
+
+/* TABLET: 2 Columns */
+@media (max-width: 64rem) { /* ~1024px */
+    section.links {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* MOBILE: 1 Column */
+@media (max-width: 48rem) { /* ~768px */
+    section.links {
+        grid-template-columns: 1fr;
+    }
+}
 
     @media (min-width: 58.125rem) { /* 930px */
     .secLinkWrapper {
