@@ -285,6 +285,7 @@
 
     .link_ascii {
     width: 40%;
+    max-width: 750px;
     position: absolute;
     top: 0;
     right: 0;
