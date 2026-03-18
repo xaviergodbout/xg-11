@@ -112,6 +112,12 @@
     padding-bottom: var(--spacing-xs);
     margin-top: var(--spacing-lg);
     margin-bottom: var(--spacing-xs);
+    background-color: #1f1f1f;
+    display: block;
+    width: fit-content;
+    padding: 4px;
+    border-radius: 10px;
+    font-weight: 500;
     }
 
     ol, ul, .header-controls {
@@ -323,6 +329,7 @@
     top: 0;
     right: 0;
     pointer-events: none;
+    z-index: -9999;
     }
 
     html.light-theme .link_ascii,
