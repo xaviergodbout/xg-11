@@ -58,12 +58,15 @@
         body, h1,  h2,  h3, h4,  h5,  h6, p,  ol,  ul, li span {
             color: var(--color-text-dark);
         }
+        h2 {
+            background-color: var(--color-link-light);
+        }
         li a.link {
             background-color: var(--color-link-light);
         }
 
         li a.link:hover {
-            border-color: var(--color-border-light);
+            background-color: var(--color-border-light);
         }
 
         ::selection {
