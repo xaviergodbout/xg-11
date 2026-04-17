@@ -59,7 +59,7 @@ html {
       color: var(--color-text-dark);
     }
 
-    h2, li a.link {
+    h2, li a.link, #server-login-btn {
       background-color: var(--color-link-light);
     }
 
@@ -88,7 +88,7 @@ body {
   color: inherit;
 }
 
-h1, h2, p, a, span {
+h1, h2, p, a, span, #server-login-btn {
   font-family: inherit;
   font-size: var(--font-size-base);
   margin: 0;
@@ -97,11 +97,15 @@ h1, h2, p, a, span {
   color: inherit;
 }
 
+#server-login-btn {
+  border: none;
+}
+
 p {
   font-size: var(--font-size-small);
 }
 
-h2 {
+h2, #server-login-btn {
   padding-block-end: var(--spacing-xs);
   margin-block: var(--spacing-lg) var(--spacing-xs); /* Top/Bottom margins */
   background-color: #1f1f1f;
