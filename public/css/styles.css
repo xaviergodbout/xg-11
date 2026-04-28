@@ -308,9 +308,23 @@ a.secLink {
   filter: var(--brand-filter);
 }
 
-span.theme-light__label {
+/* span.theme-light__label {
     font-size: .7rem;
     line-height: 0;
+} */
+
+.theme-dark__label {
+  width: 6px;
+  height: 10px;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
+  background: var(--color-text);
+}
+
+.theme-light__label {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-text);
 }
 
 .theme-toggle {
