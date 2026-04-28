@@ -308,6 +308,11 @@ a.secLink {
   filter: var(--brand-filter);
 }
 
+span.theme-light__label {
+    font-size: .7rem;
+    line-height: 0;
+}
+
 .theme-toggle {
   position: relative;
   display: inline-flex;
