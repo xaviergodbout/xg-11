@@ -1,8 +1,14 @@
-<header>
-    <button class="logo" id="toggle-theme">
-        <img src="/img/x-g_logo_spin.gif" alt="x-g logo" width="100" >
-        <div class="toolbox">
-            Toggle Theme
-        </div>
-    </button>
+<header class="site-header">
+    <a class="logo" href="/" aria-label="x-g home">
+        <img src="/img/x-g_logo_spin.gif" alt="x-g logo" width="100">
+    </a>
+
+    <label class="theme-toggle" for="theme-toggle">
+        <span>𖤓</span>
+        <input type="checkbox" id="theme-toggle" aria-label="Toggle light or dark theme">
+        <span class="theme-toggle__track" aria-hidden="true">
+            <span class="theme-toggle__thumb"></span>
+        </span>
+        <span>⏾</span>
+    </label>
 </header>

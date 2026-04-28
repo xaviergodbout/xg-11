@@ -2,7 +2,9 @@
    1. Design Tokens (Variables)
    ========================================= */
 :root {
-  /* Colors */
+  color-scheme: dark light;
+
+  /* Raw Colors */
   --color-bg-dark: #181717;
   --color-bg-light: #e8e7e1;
   --color-link-dark: #2c2c2c;
@@ -11,6 +13,17 @@
   --color-text-light: #fff;
   --color-border-light: #b9b9b4;
   --color-border-dark: #444;
+
+  /* Active Theme, defaults to dark */
+  --color-bg: var(--color-bg-dark);
+  --color-text: var(--color-text-light);
+  --color-surface: #1f1f1f;
+  --color-surface-hover: var(--color-link-dark);
+  --color-border: var(--color-border-dark);
+  --color-muted: var(--color-link-dark);
+  --selection-bg: var(--color-text-light);
+  --selection-text: var(--color-bg-dark);
+  --brand-filter: none;
 
   /* Typography */
   --font-mono: 'Azeret Mono', monospace;
@@ -31,6 +44,49 @@
   --max-width-link: 50rem;
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: var(--color-bg-light);
+    --color-text: var(--color-text-dark);
+    --color-surface: var(--color-link-light);
+    --color-surface-hover: var(--color-border-light);
+    --color-border: var(--color-border-light);
+    --color-muted: var(--color-link-dark);
+    --selection-bg: var(--color-bg-dark);
+    --selection-text: var(--color-text-light);
+    --brand-filter: invert(1) brightness(2);
+  }
+}
+
+/* CSS-only manual toggle: checked = inverse of the system theme for this page load. */
+@media (prefers-color-scheme: dark) {
+  html:has(#theme-toggle:checked) {
+    --color-bg: var(--color-bg-light);
+    --color-text: var(--color-text-dark);
+    --color-surface: var(--color-link-light);
+    --color-surface-hover: var(--color-border-light);
+    --color-border: var(--color-border-light);
+    --color-muted: var(--color-link-dark);
+    --selection-bg: var(--color-bg-dark);
+    --selection-text: var(--color-text-light);
+    --brand-filter: invert(1) brightness(2);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html:has(#theme-toggle:checked) {
+    --color-bg: var(--color-bg-dark);
+    --color-text: var(--color-text-light);
+    --color-surface: #1f1f1f;
+    --color-surface-hover: var(--color-link-dark);
+    --color-border: var(--color-border-dark);
+    --color-muted: var(--color-link-dark);
+    --selection-bg: var(--color-text-light);
+    --selection-text: var(--color-bg-dark);
+    --brand-filter: none;
+  }
+}
+
 /* =========================================
    2. Resets & Base Elements
    ========================================= */
@@ -41,46 +97,19 @@
 html {
   scrollbar-gutter: stable;
   font-size: 100%;
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-light);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
 
-  ::selection {
-    background: var(--color-text-light);
-    color: var(--color-bg-dark);
-    text-shadow: none;
-  }
-
-  /* Native Nesting for Light Theme */
-  &.light-theme {
-    background-color: var(--color-bg-light);
-    color: var(--color-text-dark);
-
-    body, h1, h2, h3, h4, h5, h6, p, ol, ul, li span {
-      color: var(--color-text-dark);
-    }
-
-    h2, li a.link, #server-login-btn {
-      background-color: var(--color-link-light);
-    }
-
-    li a.link:hover {
-      background-color: var(--color-border-light);
-    }
-
-    ::selection {
-      background: var(--color-bg-dark);
-      color: var(--color-text-light);
-    }
-
-    .link_ascii,
-    .logo {
-      filter: invert(1) brightness(2);
-    }
-  }
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+  text-shadow: none;
 }
 
 body {
   width: 100%;
+  min-height: 100vh;
   margin: 5rem auto 0;
   padding-inline: var(--spacing-lg); /* Logical property for padding left/right */
   font-family: var(--font-mono);
@@ -108,7 +137,7 @@ p {
 h2, #server-login-btn {
   padding-block-end: var(--spacing-xs);
   margin-block: var(--spacing-lg) var(--spacing-xs); /* Top/Bottom margins */
-  background-color: #1f1f1f;
+  background-color: var(--color-surface);
   display: inline-block;
   padding: 10px;
   border-radius: 12px;
@@ -172,7 +201,7 @@ li {
 }
 
 li a.link {
-  background-color: #1f1f1f;
+  background-color: var(--color-surface);
   padding: 12px 16px;
   border-radius: 4px;
   transition: all 0.3s ease-in-out;
@@ -189,7 +218,7 @@ li a.link {
   }
 
   &:hover {
-    background-color: var(--color-link-dark);
+    background-color: var(--color-surface-hover);
     border-radius: 12px;
   }
 }
@@ -234,7 +263,7 @@ section.links {
 }
 
 a.secLink {
-  color: #444;
+  color: var(--color-muted);
   font-size: var(--font-size-small);
   z-index: 1;
   opacity: 0.3;
@@ -259,43 +288,71 @@ a.secLink {
 /* =========================================
    6. UI Elements & Decorators 
    ========================================= */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  width: 100%;
+  margin-block-end: var(--spacing-lg);
+}
+
 .logo {
-  cursor: pointer;
-  transition: filter 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+}
+
+.logo img,
+.link_ascii {
+  filter: var(--brand-filter);
+}
+
+.theme-toggle {
   position: relative;
-  background: none;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: var(--font-size-small);
+  user-select: none;
+}
 
-  .toolbox {
-    position: absolute;
-    inset-block-end: -2.5rem; /* Replaces 'bottom' */
-    inset-inline: 0;          /* Replaces 'left: 0; right: 0;' */
-    background: var(--color-link-dark);
-    color: var(--color-text-light);
-    padding: 0.3125rem;
-    border-radius: 0.375rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    transform: translateY(-0.3125rem);
-  }
+.theme-toggle input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+}
 
-  @media (hover: hover) and (pointer: fine) {
-    &:hover .toolbox {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0.3125rem);
-      transition-delay: 1s;
-    }
-  }
+.theme-toggle__track {
+  inline-size: 3rem;
+  block-size: 1.5rem;
+  border-radius: 8px;
+  background: var(--color-surface);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1875rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
 
-  @media (hover: none) {
-    &:hover .toolbox {
-      display: none !important;
-    }
-  }
+.theme-toggle__thumb {
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-radius: 5px;
+  background: var(--color-text);
+  transform: translateX(0);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-toggle input:checked + .theme-toggle__track .theme-toggle__thumb {
+  transform: translateX(1.5rem);
+}
+
+.theme-toggle input:focus-visible + .theme-toggle__track {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
 }
 
 .link_ascii {
@@ -317,14 +374,14 @@ a.secLink {
    7. Footer
    ========================================= */
 footer {
-  border-block-start: 1px solid var(--color-link-dark);
+  border-block-start: 1px solid var(--color-muted);
   margin-block-start: 7.5rem;
   padding-block-start: var(--spacing-xs);
   display: flex;
   justify-content: space-between;
 
   p, span {
-    color: var(--color-link-dark);
+    color: var(--color-muted);
     font-size: var(--font-size-small);
   }
 
@@ -333,7 +390,7 @@ footer {
 }
 
 .logo_footer svg {
-  fill: var(--color-link-dark);
+  fill: var(--color-muted);
   width: 2.5rem;
 }
 
