@@ -21,6 +21,7 @@
   --color-surface-hover: var(--color-link-dark);
   --color-border: var(--color-border-dark);
   --color-muted: var(--color-link-dark);
+  --color-footer: var(--color-border-dark);
   --selection-bg: var(--color-text-light);
   --selection-text: var(--color-bg-dark);
   --brand-filter: none;
@@ -52,6 +53,7 @@
     --color-surface-hover: var(--color-border-light);
     --color-border: var(--color-border-light);
     --color-muted: var(--color-link-dark);
+      --color-footer: var(--color-border-dark);
     --selection-bg: var(--color-bg-dark);
     --selection-text: var(--color-text-light);
     --brand-filter: invert(1) brightness(2);
@@ -67,6 +69,7 @@
     --color-surface-hover: var(--color-border-light);
     --color-border: var(--color-border-light);
     --color-muted: var(--color-link-dark);
+    --color-footer: var(--color-link-dark);
     --selection-bg: var(--color-bg-dark);
     --selection-text: var(--color-text-light);
     --brand-filter: invert(1) brightness(2);
@@ -109,8 +112,10 @@ html {
 
 body {
   width: 100%;
-  min-height: 100vh;
-  margin: 5rem auto 0;
+  min-block-size: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  margin: 0 auto 0;
   padding-inline: var(--spacing-lg); /* Logical property for padding left/right */
   font-family: var(--font-mono);
   font-weight: 400;
@@ -288,13 +293,14 @@ a.secLink {
 /* =========================================
    6. UI Elements & Decorators 
    ========================================= */
-.site-header {
+header, .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-sm);
   width: 100%;
   margin-block-end: var(--spacing-lg);
+  margin-top: 5rem;
 }
 
 .logo {
@@ -400,7 +406,7 @@ footer {
   justify-content: space-between;
 
   p, span {
-    color: var(--color-muted);
+    color: var(--color-footer);
     font-size: var(--font-size-small);
   }
 
@@ -409,7 +415,7 @@ footer {
 }
 
 .logo_footer svg {
-  fill: var(--color-muted);
+  fill: var(--color-footer);
   width: 2.5rem;
 }
 
