@@ -12,7 +12,12 @@
     width: 32px;
     height: 32px;
   }
-  label {
+
+
+section.cms {
+    padding-top: 200px;
+
+      label {
           font-size: 12px;
           display: flex;
           flex-direction: column;
@@ -42,12 +47,12 @@
       button {
       background-color: #2C2C2C;
       font-family: 'Azeret Mono', monospace;
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 400;
       color: #fff;
       text-decoration: none;
         display: inline-block;
-        padding: 20px 30px;
+        padding: 10px 15px;
         cursor: pointer;
         border: 2px solid transparent;
         transition: all 0.3s ease-in-out; /* Ensures smooth transition for background and borders */
@@ -61,9 +66,7 @@
           transition: all .3s ease-in-out;
       }
 
-      section.cms {
-          padding-top: 200px;
-      }
+
   h2 {
       margin-bottom: 30px;
   }
@@ -93,3 +96,4 @@
   .error {
     border: 2px solid red !important;
   }
+}

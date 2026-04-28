@@ -480,3 +480,26 @@ footer {
     body { user-select: none; }
   }
 }
+
+
+
+
+
+
+
+/* =========================================
+   9. 404
+   ========================================= */
+
+   section.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    padding-block: var(--spacing-lg);
+
+    a {
+      text-decoration: underline;
+    }
+   }
