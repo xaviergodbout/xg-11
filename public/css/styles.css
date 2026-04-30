@@ -43,6 +43,15 @@
   --max-width-page: 75rem;
   --max-width-list: 56.25rem;
   --max-width-link: 50rem;
+
+  /* Transitions */
+  --transition-theme:
+    color .3s ease,
+    background-color .3s ease,
+    border-color .3s ease,
+    fill .3s ease,
+    stroke .3s ease,
+    box-shadow .3s ease;
 }
 
 @media (prefers-color-scheme: light) {
@@ -95,7 +104,26 @@
    ========================================= */
 *, *::before, *::after {
   box-sizing: border-box;
-  transition: all .3s ease-in-out;
+}
+
+/* Theme transitions are intentionally targeted.
+   Avoid `html *`, because transitioning every child inside links can cause flashing/flickering during theme changes. */
+html,
+body,
+h2,
+#server-login-btn,
+footer,
+.logo_footer svg,
+.logo img,
+.link_ascii,
+.theme-toggle,
+.theme-toggle__track,
+.theme-toggle__thumb,
+li a.link,
+img,
+.theme-dark__label,
+.theme-light__label {
+  transition: var(--transition-theme);
 }
 
 html {
@@ -210,14 +238,13 @@ li a.link {
   background-color: var(--color-surface);
   padding: 12px 16px;
   border-radius: 4px;
-  transition: all 0.3s ease-in-out;
+  transition: border-radius 0.3s ease-in-out;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-
   span {
     display: flex;
     align-items: center;
@@ -227,6 +254,12 @@ li a.link {
     background-color: var(--color-surface-hover);
     border-radius: 12px;
   }
+}
+
+/* Prevent link icons from running their own theme transition/repaint.
+   The parent link still transitions smoothly. */
+li a.link img {
+  transition: none;
 }
 
 /* =========================================
@@ -257,7 +290,7 @@ section.links {
 /* =========================================
    5. Secondary Interactions
    ========================================= */
-.secLinkWrapper {
+/* .secLinkWrapper {
   display: flex;
   align-items: center;
   flex-flow: row;
@@ -289,7 +322,7 @@ a.secLink {
   a:not(.secLink) {
     width: 100%;
   }
-}
+} */
 
 /* =========================================
    6. UI Elements & Decorators 
