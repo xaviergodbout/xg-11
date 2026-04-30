@@ -149,6 +149,10 @@ body {
   font-family: var(--font-mono);
   font-weight: 400;
   color: inherit;
+
+  @media (width <= 530px) {
+    padding-inline: var(--spacing-sm); /* Logical property for padding left/right */
+  }
 }
 
 h1, h2, p, a, span, #server-login-btn {
@@ -227,11 +231,11 @@ li {
     object-fit: contain;
   }
 
-  p {
+  /* p {
     @media (width <= 530px) {
       display: none;
     }
-  }
+  } */
 }
 
 li a.link {
@@ -254,13 +258,16 @@ li a.link {
     background-color: var(--color-surface-hover);
     border-radius: 12px;
   }
+
+  /* Prevent link icons from running their own theme transition/repaint.
+   The parent link still transitions smoothly. */
+  img {
+    transition: none;
+  }
 }
 
-/* Prevent link icons from running their own theme transition/repaint.
-   The parent link still transitions smoothly. */
-li a.link img {
-  transition: none;
-}
+
+
 
 /* =========================================
    4. Grid Structure
@@ -608,11 +615,11 @@ button {
   transition: none;
 }
 
-.link__description {
+span.link__description {
   font-size: var(--font-size-small);
 
   @media (width <= 530px) {
-    display: none;
+    display: none !important
   }
 }
 
