@@ -104,4 +104,16 @@
       }
     });
   }
+
+  function updateFavicon() {
+    const favicon = document.getElementById('favicon');
+    const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    favicon.href = darkMode ? '/img/x-g_favicon_dark.svg' : '/img/x-g_favicon_light.svg';
+  }
+
+  // Run on load
+  updateFavicon();
+
+  // Listen for changes in the theme
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
 }());
