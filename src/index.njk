@@ -1,37 +1,67 @@
 ---
 layout: base.njk
 title: x-g.ca | Link Index
+description: A curated index of projects, tools, servers, and links by x-g.ca.
 ---
 
-<section class="links">
-    {% for section in linkSections %}
-        <div class="links-container {{ section.class }}">
-            <h2>{{ section.title }}</h2>
+<main id="main-content" class="page-content" aria-labelledby="page-title">
+    <h1 id="page-title" class="visually-hidden">x-g.ca link index</h1>
 
-            <ul>
-                {% for item in section.links %}
-                    <li>
-                        <a
-                            href="{{ item.url }}"
-                            class="link"
-                            {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}
-                        >
-                            <span>
-                                <img src="{{ item.icon }}" alt="{{ item.alt }}">
-                                <span class="hide-gv">{{ item.label }}</span>
-                            </span>
-                            <p>{{ item.description }}</p>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endfor %}
+    <section class="links" aria-label="Link categories">
+        {% for section in linkSections %}
+            <article class="links-container {{ section.class }}" aria-labelledby="section-{{ loop.index }}-title">
+                <h2 id="section-{{ loop.index }}-title" class="section-title">
+                    {{ section.title }}
+                    <span class="link-count" aria-label="{{ section.links | length }} links">({{ section.links | length }})</span>
+                </h2>
 
-    <div class="links-container serverlist-wrapper">
-        <button id="server-login-btn" class="link" style="cursor: pointer;">
-            <span class="theme-light__label"></span> /server
-        </button>
-        <div id="secure-server-links"></div>
-    </div>
-</section>
+                <ul class="link-list">
+                    {% for item in section.links %}
+                        {% set linkId = 'link-' ~ loop.parent.loop.index ~ '-' ~ loop.index %}
+                        <li class="link-list__item">
+                            <a
+                                id="{{ linkId }}"
+                                href="{{ item.url }}"
+                                class="link"
+                                {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}
+                                aria-describedby="{{ linkId }}-description"
+                            >
+                                <span class="link__label">
+                                    <img
+                                        class="link__icon"
+                                        src="{{ item.icon }}"
+                                        alt=""
+                                        width="16"
+                                        height="16"
+                                        loading="lazy"
+                                        decoding="async"
+                                        aria-hidden="true"
+                                    >
+                                    <span class="hide-gv">{{ item.label }}</span>
+                                </span>
+                                <span id="{{ linkId }}-description" class="link__description">{{ item.description }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </article>
+        {% endfor %}
+
+        <article class="links-container serverlist-wrapper" aria-labelledby="server-links-title">
+            <h2 id="server-links-title" class="visually-hidden">Server links</h2>
+
+            <button
+                type="button"
+                id="server-login-btn"
+                class="server-login-btn"
+                aria-controls="secure-server-links"
+                aria-expanded="false"
+            >
+                <span class="theme-light__label" aria-hidden="true"></span>
+                <span>/server</span>
+            </button>
+
+            <div id="secure-server-links" class="secure-server-links" aria-live="polite"></div>
+        </article>
+    </section>
+</main>
