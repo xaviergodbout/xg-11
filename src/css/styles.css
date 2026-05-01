@@ -1,3 +1,12 @@
+/* Local font: place the WOFF2 variable font at /fonts/azeret-mono/AzeretMono-Variable.woff2 */
+@font-face {
+  font-family: "Azeret Mono";
+  src: url("/fonts/azeret-mono/AzeretMono-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* =========================================
    1. Design Tokens (Variables)
    ========================================= */
@@ -21,13 +30,13 @@
   --color-surface-hover: var(--color-link-dark);
   --color-border: var(--color-border-dark);
   --color-muted: var(--color-link-dark);
-  --color-footer: var(--color-border-dark);
+  --color-footer: var(--color-text);
   --selection-bg: var(--color-text-light);
   --selection-text: var(--color-bg-dark);
   --brand-filter: none;
 
   /* Typography */
-  --font-mono: 'Azeret Mono', monospace;
+  --font-mono: 'Azeret Mono', ui-monospace, 'SFMono-Regular', 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
   --font-size-base: 0.8rem;
   --font-size-small: 0.6rem;
 
@@ -62,7 +71,7 @@
     --color-surface-hover: var(--color-border-light);
     --color-border: var(--color-border-light);
     --color-muted: var(--color-link-dark);
-      --color-footer: var(--color-border-dark);
+      --color-footer: var(--color-text);
     --selection-bg: var(--color-bg-dark);
     --selection-text: var(--color-text-light);
     --brand-filter: invert(1) brightness(2);
@@ -78,7 +87,7 @@
     --color-surface-hover: var(--color-border-light);
     --color-border: var(--color-border-light);
     --color-muted: var(--color-link-dark);
-    --color-footer: var(--color-link-dark);
+    --color-footer: var(--color-text);
     --selection-bg: var(--color-bg-dark);
     --selection-text: var(--color-text-light);
     --brand-filter: invert(1) brightness(2);
@@ -350,8 +359,7 @@ header, .site-header {
   width: auto;
 }
 
-.logo img,
-.link_ascii {
+.logo img {
   filter: var(--brand-filter);
 }
 
@@ -424,12 +432,18 @@ header, .site-header {
 .link_ascii {
   width: 40%;
   max-width: 750px;
+  aspect-ratio: 1000 / 609;
   position: absolute;
-  inset-block-start: 0; /* Replaces 'top' */
-  inset-inline-end: 0;  /* Replaces 'right' */
+  inset-block-start: 0;
+  inset-inline-end: 0;
   pointer-events: none;
-  z-index: -9999;
+  z-index: -1;
   opacity: 0.05;
+  filter: var(--brand-filter);
+  background-image: url('/img/link_ascii.webp');
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: contain;
 
   @media (width <= 850px) {
     width: 60%;
@@ -455,8 +469,12 @@ footer {
   a { width: auto !important; }
 }
 
+.logo_footer {
+  color: var(--color-footer);
+}
+
 .logo_footer svg {
-  fill: var(--color-footer);
+  fill: currentColor;
   width: 2.5rem;
 }
 
