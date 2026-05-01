@@ -12,7 +12,8 @@ content:
     type: file
     path: src/_data/linkSections.json
     format: json
-    list: true
+    list:
+      summary: "{title}"
     fields:
       - name: title
         label: Section title
@@ -27,7 +28,8 @@ content:
       - name: links
         label: Links
         type: object
-        list: true
+        list:
+          summary: "{label}"
         fields:
           - name: url
             label: URL
