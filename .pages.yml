@@ -18,27 +18,21 @@ content:
         label: Section title
         type: string
         required: true
-        description: Example: /links, /games, /dev, /projects
 
       - name: class
         label: CSS class
         type: string
         required: true
-        description: Example: links-list, games-list, devlist, projects-list
 
       - name: links
         label: Links
         type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.label}"
+        list: true
         fields:
           - name: url
             label: URL
             type: string
             required: true
-            description: External URL or local path, like projects/uv-guide.html
 
           - name: icon
             label: Icon
