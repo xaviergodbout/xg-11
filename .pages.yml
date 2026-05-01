@@ -32,7 +32,7 @@ content:
         list:
           collapsible:
             collapsed: true
-            summary: "{label} → {url}"
+            summary: "{fields.label}"
         fields:
           - name: url
             label: URL
@@ -53,22 +53,18 @@ content:
             label: Icon alt text
             type: string
             required: false
-            description: You currently do not render this visually, but keeping it in the data is fine.
 
           - name: label
             label: Link label
             type: string
             required: true
-            description: Main visible label.
 
           - name: description
             label: Description
             type: string
             required: true
-            description: Small text shown beside or under the label.
 
           - name: external
             label: External link
             type: boolean
             required: true
-            description: Turn on for links that should open in a new tab.
