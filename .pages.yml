@@ -1,0 +1,74 @@
+media:
+  - name: link-icons
+    label: Link icons
+    input: src/img/xg_icon
+    output: img/xg_icon
+    extensions: [svg, webp, png, jpg, jpeg]
+    rename: safe
+
+content:
+  - name: link_sections
+    label: Link sections
+    type: file
+    path: src/_data/linkSections.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Section title
+        type: string
+        required: true
+        description: Example: /links, /games, /dev, /projects
+
+      - name: class
+        label: CSS class
+        type: string
+        required: true
+        description: Example: links-list, games-list, devlist, projects-list
+
+      - name: links
+        label: Links
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label} → {url}"
+        fields:
+          - name: url
+            label: URL
+            type: string
+            required: true
+            description: External URL or local path, like projects/uv-guide.html
+
+          - name: icon
+            label: Icon
+            type: image
+            required: true
+            options:
+              media: link-icons
+              extensions: [svg, webp, png, jpg, jpeg]
+              rename: safe
+
+          - name: alt
+            label: Icon alt text
+            type: string
+            required: false
+            description: You currently do not render this visually, but keeping it in the data is fine.
+
+          - name: label
+            label: Link label
+            type: string
+            required: true
+            description: Main visible label.
+
+          - name: description
+            label: Description
+            type: string
+            required: true
+            description: Small text shown beside or under the label.
+
+          - name: external
+            label: External link
+            type: boolean
+            required: true
+            description: Turn on for links that should open in a new tab.
