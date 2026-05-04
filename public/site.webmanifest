@@ -1,7 +1,7 @@
 {
-  "name": "x-g.ca | Link Index",
+  "name": "Personal Link Directory",
   "short_name": "x-g.ca",
-  "description": "Personal Link Index - Easy access to all your favorite services and tools",
+  "description": "Personal Link Directory",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a1a1a",
