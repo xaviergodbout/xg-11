@@ -11,6 +11,7 @@
     registerServiceWorker();
     initInstallPrompt();
     initSecureServerLinks();
+    initLinkLayoutToggle();
   });
 
   function updateCurrentYear() {
@@ -89,9 +90,19 @@
   function initSecureServerLinks() {
     const loginBtn = document.getElementById('server-login-btn');
     const secureContainer = document.getElementById('secure-server-links');
+    const secureWrapper = document.getElementById('serverlist-wrapper');
     if (!loginBtn || !secureContainer) return;
 
     loginBtn.addEventListener('click', async () => {
+      if (loginBtn.classList.contains('is-unlocked')) {
+        secureContainer.innerHTML = '';
+        if (secureWrapper) secureWrapper.hidden = true;
+        loginBtn.classList.remove('is-unlocked');
+        loginBtn.setAttribute('aria-label', 'Unlock server links');
+        loginBtn.setAttribute('aria-expanded', 'false');
+        return;
+      }
+
       const password = prompt('Enter the password to view server links:');
       if (!password) return;
 
@@ -105,12 +116,66 @@
         if (!decryptedHTML) throw new Error('Invalid password');
 
         secureContainer.innerHTML = decryptedHTML;
-        loginBtn.hidden = true;
+        normalizeSecureServerLinks(secureContainer);
+        if (secureWrapper) secureWrapper.hidden = false;
+        loginBtn.disabled = false;
+        loginBtn.classList.add('is-unlocked');
+        loginBtn.setAttribute('aria-label', 'Server links unlocked');
         loginBtn.setAttribute('aria-expanded', 'true');
       } catch {
         alert('Incorrect password.');
         loginBtn.disabled = false;
       }
     });
+  }
+
+  function normalizeSecureServerLinks(container) {
+    container.querySelectorAll('ul').forEach((list) => {
+      list.classList.add('link-list');
+    });
+
+    container.querySelectorAll('li').forEach((item) => {
+      item.classList.add('link-list__item');
+    });
+
+    container.querySelectorAll('a').forEach((link, index) => {
+      const linkNumber = index + 1;
+
+      link.classList.add('link');
+      link.style.setProperty('--link-anchor', `--server-link-${linkNumber}`);
+      link.querySelectorAll('img').forEach((image) => {
+        image.classList.add('link__icon');
+      });
+
+      if (!link.dataset.iconLabel) {
+        link.dataset.iconLabel = getIconLabel(link, linkNumber);
+      }
+    });
+  }
+
+  function getIconLabel(link, fallbackNumber) {
+    const clone = link.cloneNode(true);
+    clone.querySelectorAll('.link__description, p, small').forEach((node) => node.remove());
+
+    return clone.textContent.replace(/\s+/g, ' ').trim()
+      || link.getAttribute('aria-label')
+      || link.getAttribute('title')
+      || `Server ${fallbackNumber}`;
+  }
+
+  function initLinkLayoutToggle() {
+    resetHorizontalScroll();
+
+    const iconToggle = document.getElementById('links-icon-toggle');
+    if (!iconToggle) return;
+
+    iconToggle.addEventListener('change', resetHorizontalScroll);
+  }
+
+  function resetHorizontalScroll() {
+    window.scrollTo(0, window.scrollY);
+    if (document.scrollingElement) document.scrollingElement.scrollLeft = 0;
+    document.documentElement.scrollLeft = 0;
+    document.body.scrollLeft = 0;
   }
 })();

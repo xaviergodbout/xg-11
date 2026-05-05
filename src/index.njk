@@ -9,6 +9,7 @@ description: A curated directory of projects, tools, servers, and links by x-g.c
 
     <section class="links" aria-label="Link categories">
         {% for section in linkSections %}
+            {% set sectionIndex = loop.index %}
             <article class="links-container {{ section.class }}" aria-labelledby="section-{{ loop.index }}-title">
                 <h2 id="section-{{ loop.index }}-title" class="section-title">
                     {{ section.title }}
@@ -17,12 +18,13 @@ description: A curated directory of projects, tools, servers, and links by x-g.c
 
                 <ul class="link-list">
                     {% for item in section.links %}
-                        {% set linkId = 'link-' ~ loop.parent.loop.index ~ '-' ~ loop.index %}
+                        {% set linkId = 'link-' ~ sectionIndex ~ '-' ~ loop.index %}
                         <li class="link-list__item">
                             <a
                                 id="{{ linkId }}"
                                 href="{{ item.url }}"
                                 class="link"
+                                style="--link-anchor: --{{ linkId }};"
                                 {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}
                                 aria-describedby="{{ linkId }}-description"
                             >
@@ -47,19 +49,8 @@ description: A curated directory of projects, tools, servers, and links by x-g.c
             </article>
         {% endfor %}
 
-        <article class="links-container serverlist-wrapper" aria-labelledby="server-links-title">
+        <article id="serverlist-wrapper" class="links-container serverlist-wrapper" aria-labelledby="server-links-title" hidden>
             <h2 id="server-links-title" class="visually-hidden">Server links</h2>
-
-            <button
-                type="button"
-                id="server-login-btn"
-                class="server-login-btn"
-                aria-controls="secure-server-links"
-                aria-expanded="false"
-            >
-                <span class="theme-light__label" aria-hidden="true"></span>
-                <span>/server</span>
-            </button>
 
             <div id="secure-server-links" class="secure-server-links" aria-live="polite"></div>
         </article>

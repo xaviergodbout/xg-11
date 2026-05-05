@@ -3,12 +3,49 @@
         <img src="/img/x-g_logo_spin.gif" alt="x-g logo" width="100" height="42" fetchpriority="high" decoding="async">
     </a>
 
-    <label class="theme-toggle" for="theme-toggle">
-        <span class="theme-dark__label" aria-hidden="true"></span>
-        <input type="checkbox" id="theme-toggle" aria-label="Toggle light or dark theme">
-        <span class="theme-toggle__track" aria-hidden="true">
-            <span class="theme-toggle__thumb"></span>
-        </span>
-        <span class="theme-light__label" aria-hidden="true"></span>
-    </label>
+    <div class="header-controls">
+        {% if page.url == "/" %}
+            <button
+                type="button"
+                id="server-login-btn"
+                class="header-icon-btn server-lock-btn"
+                aria-controls="secure-server-links"
+                aria-expanded="false"
+                aria-label="Unlock server links"
+            >
+                <svg class="lock-icon lock-icon--locked" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10V8a5 5 0 0 1 10 0v2" />
+                    <rect x="5" y="10" width="14" height="10" rx="2" />
+                </svg>
+                <svg class="lock-icon lock-icon--unlocked" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 10V8a5 5 0 0 1 9.2-2.8" />
+                    <rect x="5" y="10" width="14" height="10" rx="2" />
+                </svg>
+            </button>
+
+            <input
+                type="checkbox"
+                id="links-icon-toggle"
+                class="header-toggle-input"
+                aria-label="Use icon-only link layout"
+            >
+            <label class="header-icon-btn links-icon-toggle" for="links-icon-toggle" title="Icon-only links">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="4" y="4" width="6" height="6" rx="1.5" />
+                    <rect x="14" y="4" width="6" height="6" rx="1.5" />
+                    <rect x="4" y="14" width="6" height="6" rx="1.5" />
+                    <rect x="14" y="14" width="6" height="6" rx="1.5" />
+                </svg>
+            </label>
+        {% endif %}
+
+        <label class="theme-toggle" for="theme-toggle">
+            <span class="theme-dark__label" aria-hidden="true"></span>
+            <input type="checkbox" id="theme-toggle" aria-label="Toggle light or dark theme">
+            <span class="theme-toggle__track" aria-hidden="true">
+                <span class="theme-toggle__thumb"></span>
+            </span>
+            <span class="theme-light__label" aria-hidden="true"></span>
+        </label>
+    </div>
 </header>
