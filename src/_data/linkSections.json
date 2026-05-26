@@ -82,7 +82,7 @@
     "class": "games-list",
     "links": [
       {
-        "active": true,
+        "active": false,
         "url": "https://map.x-g.ca",
         "icon": "img/xg_icon/bluemap_icon.webp",
         "alt": "Minecraft Map Icon",
