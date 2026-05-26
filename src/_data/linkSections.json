@@ -4,6 +4,7 @@
     "class": "links-list",
     "links": [
       {
+        "active": true,
         "url": "http://plex.x-g.ca/",
         "icon": "img/xg_icon/plex_icon.webp",
         "alt": "Plex Icon",
@@ -12,6 +13,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://seerr.x-g.ca",
         "icon": "img/xg_icon/overseerr_icon.webp",
         "alt": "Seerr icon",
@@ -20,6 +22,7 @@
         "external": true
       },
       {
+        "active": false,
         "url": "https://rom.x-g.ca",
         "icon": "img/xg_icon/romm_icon.webp",
         "alt": "RomM Icon",
@@ -28,6 +31,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://bd.x-g.ca",
         "icon": "img/xg_icon/komga_icon.webp",
         "alt": "Komga Icon",
@@ -36,6 +40,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://audiobook.x-g.ca",
         "icon": "img/xg_icon/audiobookshelf_icon.webp",
         "alt": "audiobookshelf Icon",
@@ -44,6 +49,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://portfolio.x-g.ca",
         "icon": "img/xg_icon/xg-portfolio_icon.webp",
         "alt": "Xavier Godbout Portfolio Icon",
@@ -52,6 +58,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://wiki.x-g.ca",
         "icon": "img/xg_icon/notion_icon.webp",
         "alt": "Notion Icon",
@@ -60,6 +67,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://www.last.fm/user/x--g",
         "icon": "img/xg_icon/last-fm_icon.webp",
         "alt": "last.fm Icon",
@@ -74,6 +82,7 @@
     "class": "games-list",
     "links": [
       {
+        "active": true,
         "url": "https://map.x-g.ca",
         "icon": "img/xg_icon/bluemap_icon.webp",
         "alt": "Minecraft Map Icon",
@@ -82,6 +91,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://map2.x-g.ca",
         "icon": "img/xg_icon/bluemap_icon.webp",
         "alt": "Minecraft Map Icon",
@@ -90,6 +100,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://modrinth.com/modpack/kk-modpack",
         "icon": "img/xg_icon/kk_icon.webp",
         "alt": "KK Skyblock Icon",
@@ -98,6 +109,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://modrinth.com/modpack/mc-ps1",
         "icon": "img/xg_icon/mcps1_icon.webp",
         "alt": "MCPS1 Icon",
@@ -106,6 +118,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://drive.google.com/file/d/1U6abpFfypp_Fkr07b4HpGOeffj0EmH4k/view?usp=sharing",
         "icon": "img/xg_icon/cobblemon_icon.webp",
         "alt": "Cobblemon Icon",
@@ -114,6 +127,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "projects/uv-guide.html",
         "icon": "img/xg_icon/pokemon-uv-guide_icon.webp",
         "alt": "Pokémon UltraViolet Mew Icon",
@@ -122,6 +136,7 @@
         "external": false
       },
       {
+        "active": true,
         "url": "https://x-g.ca/downloads/labeled_map_of_kanto_by_rythos_edited_by_leflyingcrapet.png",
         "icon": "img/xg_icon/kanto-map_icon.webp",
         "alt": "Kanto Map Icon",
@@ -136,6 +151,7 @@
     "class": "devlist",
     "links": [
       {
+        "active": true,
         "url": "https://glkvm.com",
         "icon": "img/xg_icon/glinet_icon.webp",
         "alt": "GL.iNet Icon",
@@ -144,6 +160,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://github.com/xaviergodbout?tab=repositories",
         "icon": "img/xg_icon/github_icon.webp",
         "alt": "Github Icon",
@@ -152,6 +169,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://app.netlify.com/teams/xaviergodbout/projects",
         "icon": "img/xg_icon/netlify_icon.webp",
         "alt": "Netlify Icon",
@@ -160,6 +178,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://dash.cloudflare.com/d8e423cdd6bbf1fdab389e324dbdc5bf/home/domains",
         "icon": "img/xg_icon/cloudflare_icon.webp",
         "alt": "Cloudflare Icon",
@@ -168,6 +187,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://porkbun.com/account/domainsSpeedy",
         "icon": "img/xg_icon/porkbun_icon.webp",
         "alt": "Porkbun Icon",
@@ -176,6 +196,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://mediux.pro/user/leflyingcarpet",
         "icon": "img/xg_icon/mediux_icon.webp",
         "alt": "Aura Icon",
@@ -184,6 +205,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://decap.x-g.ca",
         "icon": "img/xg_icon/decap-cms_icon.webp",
         "alt": "Decap Test Icon",
@@ -192,6 +214,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "playground",
         "icon": "img/xg_icon/css_icon.webp",
         "alt": "Decap Test Icon",
@@ -206,6 +229,7 @@
     "class": "projects-list",
     "links": [
       {
+        "active": true,
         "url": "https://cam2ascii.x-g.ca",
         "icon": "img/xg_icon/cam2ascii_icon.webp",
         "alt": "Webcam 2 Ascii Icon",
@@ -214,6 +238,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://qr.x-g.ca",
         "icon": "img/xg_icon/url2qr_icon.webp",
         "alt": "Qr code generator Icon",
@@ -222,6 +247,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "https://url.x-g.ca",
         "icon": "img/xg_icon/url2file_icon.webp",
         "alt": "url2file Icon",
@@ -230,6 +256,7 @@
         "external": true
       },
       {
+        "active": true,
         "url": "projects/credit-card_input.html",
         "icon": "img/xg_icon/credit-hell_icon.webp",
         "alt": "Credit Card Input - Bad UI Cup Icon",
