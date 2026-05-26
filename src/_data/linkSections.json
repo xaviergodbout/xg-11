@@ -74,6 +74,24 @@
         "label": "Last.fm",
         "description": "Music Profile",
         "external": true
+      },
+      {
+        "active": true,
+        "url": "https://addons.mozilla.org/en-CA/firefox/addon/comiceerr/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search",
+        "icon": "img/xg_icon/comiceer-icon32.png",
+        "alt": "Comiceer Icon",
+        "label": "Comiceer",
+        "description": "GetComics download link in LGCG",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://leagueofcomicgeeks.com/dashboard",
+        "icon": "img/xg_icon/user-menu-logo-icon.png",
+        "alt": "League of Comic Geeks Collection Icon",
+        "label": "League of Comic Geeks Collection",
+        "description": "Comic's Seer + Download",
+        "external": true
       }
     ]
   },
