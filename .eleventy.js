@@ -1,4 +1,10 @@
 module.exports = function (eleventyConfig) {
+    eleventyConfig.addFilter("whereActive", (items = []) => {
+        if (!Array.isArray(items)) return [];
+
+        return items.filter((item) => item && item.active !== false);
+    });
+
     eleventyConfig.addPassthroughCopy("src/css");
     eleventyConfig.addPassthroughCopy("src/js");
     eleventyConfig.addPassthroughCopy("src/img");

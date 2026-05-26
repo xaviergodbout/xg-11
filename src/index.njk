@@ -10,14 +10,15 @@ description: A curated directory of projects, tools, servers, and links by x-g.c
     <section class="links" aria-label="Link categories">
         {% for section in linkSections %}
             {% set sectionIndex = loop.index %}
+            {% set activeLinks = section.links | whereActive -%}
             <article class="links-container {{ section.class }}" aria-labelledby="section-{{ loop.index }}-title">
                 <h2 id="section-{{ loop.index }}-title" class="section-title">
                     {{ section.title }}
-                    <span class="link-count" aria-label="{{ section.links | length }} links">({{ section.links | length }})</span>
+                    <span class="link-count" aria-label="{{ activeLinks | length }} links">({{ activeLinks | length }})</span>
                 </h2>
 
                 <ul class="link-list">
-                    {% for item in section.links %}
+                    {% for item in activeLinks %}
                         {% set linkId = 'link-' ~ sectionIndex ~ '-' ~ loop.index %}
                         <li class="link-list__item">
                             <a

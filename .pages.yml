@@ -32,6 +32,12 @@ content:
             collapsed: true
             summary: "{fields.label}"
         fields:
+          - name: active
+            label: Active
+            type: boolean
+            default: true
+            description: When disabled, this item is not rendered on the website.
+
           - name: url
             label: URL
             type: string
