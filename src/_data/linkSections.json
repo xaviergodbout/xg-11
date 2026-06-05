@@ -224,6 +224,15 @@
       },
       {
         "active": true,
+        "url": "https://postertools.org/card-lab/",
+        "icon": "img/xg_icon/pt-logo-purple.png",
+        "alt": "postertools icon",
+        "label": "Card Lab",
+        "description": "Title Cards Generator",
+        "external": true
+      },
+      {
+        "active": true,
         "url": "https://decap.x-g.ca",
         "icon": "img/xg_icon/decap-cms_icon.webp",
         "alt": "Decap Test Icon",
