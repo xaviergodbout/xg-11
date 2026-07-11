@@ -299,6 +299,15 @@
         "label": "Credit from Hell",
         "description": "Bad UI Cup Entry",
         "external": false
+      },
+      {
+        "active": true,
+        "url": "https://cal.x-g.ca/",
+        "icon": "img/xg_icon/10691802.png",
+        "alt": "cal maker icon",
+        "label": "Calendar Maker",
+        "description": "Calendar Maker",
+        "external": true
       }
     ]
   }
