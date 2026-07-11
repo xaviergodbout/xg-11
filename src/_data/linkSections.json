@@ -92,6 +92,15 @@
         "label": "League of Comic Geeks Collection",
         "description": "Comic's Seer + Download",
         "external": true
+      },
+      {
+        "active": true,
+        "url": "https://tini.x-g.ca/",
+        "icon": "img/xg_icon/icon-192.png",
+        "alt": "tinimg icon",
+        "label": "tinimg",
+        "description": "Image compressor",
+        "external": true
       }
     ]
   },
