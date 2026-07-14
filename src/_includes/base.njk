@@ -31,10 +31,17 @@
     <link rel="preload" href="/fonts/azeret-mono/AzeretMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/css/styles.css" as="style">
     <link rel="stylesheet" href="/css/styles.css">
+    {% if pageStylesheet %}
+        <link rel="preload" href="{{ pageStylesheet }}" as="style">
+        <link rel="stylesheet" href="{{ pageStylesheet }}">
+    {% endif %}
     {% if cms %}
         <link rel="stylesheet" href="/css/cms.css">
     {% endif %}
-    <script src="js/script.js" defer></script>
+    <script src="/js/script.js" defer></script>
+    {% if pageScript %}
+        <script src="{{ pageScript }}" defer></script>
+    {% endif %}
 </head>
 
 <body>
