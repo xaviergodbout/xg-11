@@ -239,6 +239,14 @@
         "label": "CSS Playground",
         "description": "Playground to test new CSS features",
         "external": false
+      },
+      {
+        "active": true,
+        "url": "https://postertools.org/",
+        "icon": "img/xg_icon/pt-logo-purple.png",
+        "label": "CardLab",
+        "description": "Titlecard maker",
+        "external": true
       }
     ]
   },
