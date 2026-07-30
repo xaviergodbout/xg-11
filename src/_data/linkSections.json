@@ -306,6 +306,15 @@
         "label": "svg2font",
         "description": "SVG to TTF font",
         "external": true
+      },
+      {
+        "active": true,
+        "url": "https://tini,x-g.ca",
+        "icon": "img/xg_icon/icon-192.png",
+        "alt": "tini img icon",
+        "label": "Tinimg",
+        "description": "Img compressor",
+        "external": true
       }
     ]
   }
