@@ -312,7 +312,7 @@
         "url": "https://tini.x-g.ca",
         "icon": "img/xg_icon/icon-192.png",
         "alt": "tini img icon",
-        "label": "Tinimg",
+        "label": "tinimg",
         "description": "Img compressor",
         "external": true
       }
