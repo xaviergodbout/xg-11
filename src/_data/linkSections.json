@@ -247,6 +247,15 @@
         "label": "CardLab",
         "description": "Titlecard maker",
         "external": true
+      },
+      {
+        "active": true,
+        "url": "https://dash.x-g.ca/",
+        "icon": "img/xg_icon/tracearr-icon.webp",
+        "alt": "Tracearr Icon",
+        "label": "Tracearr",
+        "description": "PLex Dashboard",
+        "external": true
       }
     ]
   },
