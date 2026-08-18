@@ -73,85 +73,85 @@
     }
   }
 
-  function loadCryptoJS() {
-    if (window.CryptoJS) return Promise.resolve(window.CryptoJS);
+  // function loadCryptoJS() {
+  //   if (window.CryptoJS) return Promise.resolve(window.CryptoJS);
 
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = CRYPTO_JS_URL;
-      script.async = true;
-      script.crossOrigin = 'anonymous';
-      script.onload = () => resolve(window.CryptoJS);
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-  }
+  //   return new Promise((resolve, reject) => {
+  //     const script = document.createElement('script');
+  //     script.src = CRYPTO_JS_URL;
+  //     script.async = true;
+  //     script.crossOrigin = 'anonymous';
+  //     script.onload = () => resolve(window.CryptoJS);
+  //     script.onerror = reject;
+  //     document.head.appendChild(script);
+  //   });
+  // }
 
-  function initSecureServerLinks() {
-    const loginBtn = document.getElementById('server-login-btn');
-    const secureContainer = document.getElementById('secure-server-links');
-    const secureWrapper = document.getElementById('serverlist-wrapper');
-    if (!loginBtn || !secureContainer) return;
+  // function initSecureServerLinks() {
+  //   const loginBtn = document.getElementById('server-login-btn');
+  //   const secureContainer = document.getElementById('secure-server-links');
+  //   const secureWrapper = document.getElementById('serverlist-wrapper');
+  //   if (!loginBtn || !secureContainer) return;
 
-    loginBtn.addEventListener('click', async () => {
-      if (loginBtn.classList.contains('is-unlocked')) {
-        secureContainer.innerHTML = '';
-        if (secureWrapper) secureWrapper.hidden = true;
-        loginBtn.classList.remove('is-unlocked');
-        loginBtn.setAttribute('aria-label', 'Unlock server links');
-        loginBtn.setAttribute('aria-expanded', 'false');
-        return;
-      }
+  //   loginBtn.addEventListener('click', async () => {
+  //     if (loginBtn.classList.contains('is-unlocked')) {
+  //       secureContainer.innerHTML = '';
+  //       if (secureWrapper) secureWrapper.hidden = true;
+  //       loginBtn.classList.remove('is-unlocked');
+  //       loginBtn.setAttribute('aria-label', 'Unlock server links');
+  //       loginBtn.setAttribute('aria-expanded', 'false');
+  //       return;
+  //     }
 
-      const password = prompt('Enter the password to view server links:');
-      if (!password) return;
+  //     const password = prompt('Enter the password to view server links:');
+  //     if (!password) return;
 
-      loginBtn.disabled = true;
+  //     loginBtn.disabled = true;
 
-      try {
-        const CryptoJS = await loadCryptoJS();
-        const bytes = CryptoJS.AES.decrypt(encryptedserverHTML, password);
-        const decryptedHTML = bytes.toString(CryptoJS.enc.Utf8);
+  //     try {
+  //       const CryptoJS = await loadCryptoJS();
+  //       const bytes = CryptoJS.AES.decrypt(encryptedserverHTML, password);
+  //       const decryptedHTML = bytes.toString(CryptoJS.enc.Utf8);
 
-        if (!decryptedHTML) throw new Error('Invalid password');
+  //       if (!decryptedHTML) throw new Error('Invalid password');
 
-        secureContainer.innerHTML = decryptedHTML;
-        normalizeSecureServerLinks(secureContainer);
-        if (secureWrapper) secureWrapper.hidden = false;
-        loginBtn.disabled = false;
-        loginBtn.classList.add('is-unlocked');
-        loginBtn.setAttribute('aria-label', 'Server links unlocked');
-        loginBtn.setAttribute('aria-expanded', 'true');
-      } catch {
-        alert('Incorrect password.');
-        loginBtn.disabled = false;
-      }
-    });
-  }
+  //       secureContainer.innerHTML = decryptedHTML;
+  //       normalizeSecureServerLinks(secureContainer);
+  //       if (secureWrapper) secureWrapper.hidden = false;
+  //       loginBtn.disabled = false;
+  //       loginBtn.classList.add('is-unlocked');
+  //       loginBtn.setAttribute('aria-label', 'Server links unlocked');
+  //       loginBtn.setAttribute('aria-expanded', 'true');
+  //     } catch {
+  //       alert('Incorrect password.');
+  //       loginBtn.disabled = false;
+  //     }
+  //   });
+  // }
 
-  function normalizeSecureServerLinks(container) {
-    container.querySelectorAll('ul').forEach((list) => {
-      list.classList.add('link-list');
-    });
+  // function normalizeSecureServerLinks(container) {
+  //   container.querySelectorAll('ul').forEach((list) => {
+  //     list.classList.add('link-list');
+  //   });
 
-    container.querySelectorAll('li').forEach((item) => {
-      item.classList.add('link-list__item');
-    });
+  //   container.querySelectorAll('li').forEach((item) => {
+  //     item.classList.add('link-list__item');
+  //   });
 
-    container.querySelectorAll('a').forEach((link, index) => {
-      const linkNumber = index + 1;
+  //   container.querySelectorAll('a').forEach((link, index) => {
+  //     const linkNumber = index + 1;
 
-      link.classList.add('link');
-      link.style.setProperty('--link-anchor', `--server-link-${linkNumber}`);
-      link.querySelectorAll('img').forEach((image) => {
-        image.classList.add('link__icon');
-      });
+  //     link.classList.add('link');
+  //     link.style.setProperty('--link-anchor', `--server-link-${linkNumber}`);
+  //     link.querySelectorAll('img').forEach((image) => {
+  //       image.classList.add('link__icon');
+  //     });
 
-      if (!link.dataset.iconLabel) {
-        link.dataset.iconLabel = getIconLabel(link, linkNumber);
-      }
-    });
-  }
+  //     if (!link.dataset.iconLabel) {
+  //       link.dataset.iconLabel = getIconLabel(link, linkNumber);
+  //     }
+  //   });
+  // }
 
   function getIconLabel(link, fallbackNumber) {
     const clone = link.cloneNode(true);
