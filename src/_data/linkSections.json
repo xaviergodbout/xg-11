@@ -215,15 +215,6 @@
       },
       {
         "active": true,
-        "url": "https://mediux.pro/user/leflyingcarpet",
-        "icon": "img/xg_icon/mediux_icon.webp",
-        "alt": "Aura Icon",
-        "label": "Mediux",
-        "description": "Mediux Posters",
-        "external": true
-      },
-      {
-        "active": true,
         "url": "https://decap.x-g.ca",
         "icon": "img/xg_icon/decap-cms_icon.webp",
         "alt": "Decap Test Icon",
@@ -239,23 +230,6 @@
         "label": "CSS Playground",
         "description": "Playground to test new CSS features",
         "external": false
-      },
-      {
-        "active": true,
-        "url": "https://postertools.org/",
-        "icon": "img/xg_icon/pt-logo-purple.png",
-        "label": "CardLab",
-        "description": "Titlecard maker",
-        "external": true
-      },
-      {
-        "active": true,
-        "url": "https://dash.x-g.ca/",
-        "icon": "img/xg_icon/tracearr-icon.webp",
-        "alt": "Tracearr Icon",
-        "label": "Tracearr",
-        "description": "Plex Dashboard",
-        "external": true
       }
     ]
   },
@@ -332,6 +306,57 @@
         "alt": "brickcheck icon",
         "label": "BrickCheck",
         "description": "Lego Set Checklist",
+        "external": true
+      }
+    ]
+  },
+  {
+    "title": "/server",
+    "class": "server-list",
+    "links": [
+      {
+        "active": true,
+        "url": "https://dash.x-g.ca/",
+        "icon": "img/xg_icon/tracearr-icon.webp",
+        "alt": "Tracearr Icon",
+        "label": "Tracearr",
+        "description": "Plex Dashboard",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://postertools.org/",
+        "icon": "img/xg_icon/pt-logo-purple.png",
+        "alt": "CardLab Icon",
+        "label": "CardLab",
+        "description": "Titlecard maker",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://mediux.pro/user/leflyingcarpet",
+        "icon": "img/xg_icon/mediux_icon.webp",
+        "alt": "Mediux Icon",
+        "label": "Mediux",
+        "description": "Mediux Posters",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://aura.x-g.ca/",
+        "icon": "img/xg_icon/aura_icon.webp",
+        "alt": "Aura Icon",
+        "label": "Aura",
+        "description": "Plex Poster Select",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://up.x-g.ca/",
+        "icon": "img/xg_icon/uptime-kuma_icon.webp",
+        "alt": "Uptime Kuma Icon",
+        "label": "Uptime Kuma",
+        "description": "Server Status Dashboard",
         "external": true
       }
     ]
