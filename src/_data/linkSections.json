@@ -22,7 +22,7 @@
         "external": true
       },
       {
-        "active": true,
+        "active": false,
         "url": "https://rom.x-g.ca",
         "icon": "img/xg_icon/romm_icon.webp",
         "alt": "RomM Icon",
