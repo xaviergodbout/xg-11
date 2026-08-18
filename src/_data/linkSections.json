@@ -146,12 +146,12 @@
       },
       {
         "active": true,
-        "url": "projects/uv-guide.html",
+        "url": "projects/uv-guide.pdf",
         "icon": "img/xg_icon/pokemon-uv-guide_icon.webp",
         "alt": "Pokémon UltraViolet Mew Icon",
         "label": "Pokémon Ulta-Violet Guide",
         "description": "pdf viewer",
-        "external": false
+        "external": true
       },
       {
         "active": true,
