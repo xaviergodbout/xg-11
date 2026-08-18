@@ -310,7 +310,7 @@
       },
       {
         "active": true,
-        "url": "font.x-g.ca",
+        "url": "https://font.x-g.ca",
         "icon": "img/xg_icon/no_icon.svg",
         "label": "svg2font",
         "description": "SVG to TTF font",
@@ -323,6 +323,15 @@
         "alt": "tini img icon",
         "label": "tinimg",
         "description": "Img compressor",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://brickcheck.x-g.ca",
+        "icon": "img/xg_icon/brickcheck-icon.webp",
+        "alt": "brickcheck icon",
+        "label": "BrickCheck",
+        "description": "Lego Set Checklist",
         "external": true
       }
     ]
