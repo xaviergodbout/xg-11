@@ -92,6 +92,14 @@
         "label": "League of Comic Geeks Collection",
         "description": "Comic's Seer + Download",
         "external": true
+      },
+      {
+        "active": true,
+        "url": "https://recette.x-g.ca/",
+        "icon": "img/xg_icon/no_icon.svg",
+        "label": "Tandoor",
+        "description": "Recettes",
+        "external": true
       }
     ]
   },
@@ -306,6 +314,22 @@
         "alt": "brickcheck icon",
         "label": "BrickCheck",
         "description": "Lego Set Checklist",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://cooleur.x-g.ca/",
+        "icon": "img/xg_icon/no_icon.svg",
+        "label": "Cooleur",
+        "description": "Color Palette Generator",
+        "external": true
+      },
+      {
+        "active": true,
+        "url": "https://posterr.x-g.ca/",
+        "icon": "img/xg_icon/no_icon.svg",
+        "label": "Posterr",
+        "description": "Poster Generator",
         "external": true
       }
     ]
