@@ -331,6 +331,15 @@
         "label": "Posterr",
         "description": "Poster Generator",
         "external": true
+      },
+      {
+        "active": true,
+        "url": "https://plexeerr.x-g.ca/",
+        "icon": "img/xg_icon/no_icon.svg",
+        "alt": "temp icon",
+        "label": "Plexeerr",
+        "description": "Plex TV Guide",
+        "external": true
       }
     ]
   },
