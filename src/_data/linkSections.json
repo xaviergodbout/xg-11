@@ -334,10 +334,10 @@
       },
       {
         "active": true,
-        "url": "https://plexeerr.x-g.ca/",
+        "url": "https://flixeerr.x-g.ca/",
         "icon": "img/xg_icon/no_icon.svg",
         "alt": "temp icon",
-        "label": "Plexeerr",
+        "label": "Flixeerr",
         "description": "Plex TV Guide",
         "external": true
       }
