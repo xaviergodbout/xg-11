@@ -21,14 +21,12 @@
   --color-text-dark: #000;
   --color-text-light: #fff;
   --color-border-light: #b9b9b4;
-  --color-border-dark: #444;
 
   /* Active Theme, defaults to dark */
   --color-bg: var(--color-bg-dark);
   --color-text: var(--color-text-light);
   --color-surface: #1f1f1f;
   --color-surface-hover: var(--color-link-dark);
-  --color-border: var(--color-border-dark);
   --color-muted: var(--color-link-dark);
   --color-footer: var(--color-text);
   --selection-bg: var(--color-text-light);
@@ -45,13 +43,9 @@
   --spacing-sm: 1rem;      /* 16px */
   --spacing-md: 1.5625rem; /* 25px */
   --spacing-lg: 2.5rem;    /* 40px */
-  --spacing-xl: 5rem;      /* 80px */
-  --spacing-xxl: 10rem;    /* 160px */
 
   /* Layout Boundaries */
-  --max-width-page: 75rem;
   --max-width-list: 56.25rem;
-  --max-width-link: 50rem;
 
   /* Transitions */
   --transition-theme:
@@ -69,7 +63,6 @@
     --color-text: var(--color-text-dark);
     --color-surface: var(--color-link-light);
     --color-surface-hover: var(--color-border-light);
-    --color-border: var(--color-border-light);
     --color-muted: var(--color-link-dark);
       --color-footer: var(--color-text);
     --selection-bg: var(--color-bg-dark);
@@ -85,7 +78,6 @@
     --color-text: var(--color-text-dark);
     --color-surface: var(--color-link-light);
     --color-surface-hover: var(--color-border-light);
-    --color-border: var(--color-border-light);
     --color-muted: var(--color-link-dark);
     --color-footer: var(--color-text);
     --selection-bg: var(--color-bg-dark);
@@ -100,7 +92,6 @@
     --color-text: var(--color-text-light);
     --color-surface: #1f1f1f;
     --color-surface-hover: var(--color-link-dark);
-    --color-border: var(--color-border-dark);
     --color-muted: var(--color-link-dark);
     --selection-bg: var(--color-text-light);
     --selection-text: var(--color-bg-dark);
@@ -238,11 +229,6 @@ li {
     object-fit: contain;
   }
 
-  /* p {
-    @media (width <= 530px) {
-      display: none;
-    }
-  } */
 }
 
 li a.link {
@@ -273,9 +259,6 @@ li a.link {
   }
 }
 
-
-
-
 /* =========================================
    4. Grid Structure
    ========================================= */
@@ -300,43 +283,6 @@ section.links {
 .links-container ul {
   max-width: 100%;
 }
-
-/* =========================================
-   5. Secondary Interactions
-   ========================================= */
-/* .secLinkWrapper {
-  display: flex;
-  align-items: center;
-  flex-flow: row;
-
-  @media (width <= 930px) {
-    flex-flow: column;
-    align-items: flex-start;
-  }
-}
-
-a.secLink {
-  color: var(--color-muted);
-  font-size: var(--font-size-small);
-  z-index: 1;
-  opacity: 0.3;
-  transition: opacity 0.3s ease-in-out;
-  display: flex;
-  margin-inline-start: 0.875rem;
-
-  &:hover { opacity: 1; }
-  img { height: 0.75rem; }
-
-  @media (width <= 930px) {
-    padding-block-start: var(--spacing-xs);
-  }
-}
-
-@media (width <= 930px) {
-  a:not(.secLink) {
-    width: 100%;
-  }
-} */
 
 /* =========================================
    6. UI Elements & Decorators 
@@ -407,29 +353,6 @@ header, .site-header {
   }
 }
 
-.server-lock-btn {
-  .lock-icon {
-    position: absolute;
-  }
-
-  .lock-icon--unlocked {
-    opacity: 0;
-    transform: scale(0.82) rotate(-8deg);
-  }
-
-  &.is-unlocked {
-    .lock-icon--locked {
-      opacity: 0;
-      transform: scale(0.82) rotate(8deg);
-    }
-
-    .lock-icon--unlocked {
-      opacity: 1;
-      transform: scale(1) rotate(0);
-    }
-  }
-}
-
 .header-toggle-input {
   position: absolute;
   inline-size: 1px;
@@ -453,11 +376,6 @@ header, .site-header {
   outline: 2px solid var(--color-text);
   outline-offset: 3px;
 }
-
-/* span.theme-light__label {
-    font-size: .7rem;
-    line-height: 0;
-} */
 
 .theme-dark__label {
   width: 6px;
@@ -574,44 +492,8 @@ footer {
 }
 
 /* =========================================
-   8. PWA & Mobile Install
+   8. PWA App Modes
    ========================================= */
-#install-button {
-  position: fixed;
-  inset-block-end: 20px;
-  inset-inline-end: 20px;
-  background: #00ff88;
-  color: #1a1a1a;
-  border: none;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  cursor: pointer;
-  z-index: 1000;
-  /* Modern CSS syntax for rgba */
-  box-shadow: 0 4px 12px rgb(0 255 136 / 30%);
-  transition: all 0.3s ease;
-  font-size: var(--font-size-small);
-  display: none;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgb(0 255 136 / 40%);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  @media (width <= 768px) {
-    inset-block-end: 16px;
-    inset-inline-end: 16px;
-    padding: 10px 14px;
-    font-size: 0.65rem;
-  }
-}
-
 /* PWA App Modes */
 @media (display-mode: standalone) {
   body {
@@ -634,12 +516,6 @@ footer {
     body { user-select: none; }
   }
 }
-
-
-
-
-
-
 
 /* =========================================
    9. 404
@@ -769,13 +645,11 @@ html:has(#links-icon-toggle:checked) {
     }
   }
 
-  .section-title,
-  .secure-server-links h2 {
+  .section-title {
     margin-block: 0 var(--spacing-xs);
   }
 
-  .link-list,
-  .secure-server-links ul {
+  .link-list {
     display: inline-grid;
     grid-auto-flow: column;
     grid-auto-columns: var(--icon-link-size);
@@ -797,13 +671,11 @@ html:has(#links-icon-toggle:checked) {
     }
   }
 
-  .link-list__item,
-  .secure-server-links li {
+  .link-list__item {
     position: relative;
   }
 
-  .link-list__item a.link,
-  .secure-server-links li a {
+  .link-list__item a.link {
     inline-size: var(--icon-link-size);
     block-size: var(--icon-link-size);
     min-inline-size: var(--icon-link-size);
@@ -819,15 +691,9 @@ html:has(#links-icon-toggle:checked) {
   }
 
   .link-list__item:first-of-type a.link,
-  .link-list__item:last-of-type a.link,
-  .secure-server-links li:first-of-type a,
-  .secure-server-links li:last-of-type a {
+  .link-list__item:last-of-type a.link {
     border-radius: 8px;
     padding: 0;
-  }
-
-  .secure-server-links li a:hover {
-    background-color: var(--color-surface-hover);
   }
 
   .link__label {
@@ -835,8 +701,7 @@ html:has(#links-icon-toggle:checked) {
     place-items: center;
   }
 
-  .link__icon,
-  .secure-server-links img {
+  .link__icon {
     display: block;
     inline-size: var(--spacing-sm);
     block-size: var(--spacing-sm);
@@ -844,14 +709,11 @@ html:has(#links-icon-toggle:checked) {
     object-fit: contain;
   }
 
-  .link__description,
-  .secure-server-links p,
-  .secure-server-links small {
+  .link__description {
     display: none !important;
   }
 
-  .hide-gv,
-  .secure-server-links a::after {
+  .hide-gv {
     position: absolute;
     inset-block-start: calc(100% + 0.35rem);
     inset-inline-start: 50%;
@@ -874,12 +736,7 @@ html:has(#links-icon-toggle:checked) {
     transition: transform 0.2s ease;
   }
 
-  .secure-server-links a::after {
-    content: attr(data-icon-label);
-  }
-
-  a.link:is(:hover, :focus-visible) .hide-gv,
-  .secure-server-links a:is(:hover, :focus-visible)::after {
+  a.link:is(:hover, :focus-visible) .hide-gv {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
@@ -889,13 +746,11 @@ html:has(#links-icon-toggle:checked) {
 
 @supports (top: anchor(bottom)) {
   html:has(#links-icon-toggle:checked) {
-    .link-list__item a.link,
-    .secure-server-links li a {
+    .link-list__item a.link {
       anchor-name: var(--link-anchor);
     }
 
-    .hide-gv,
-    .secure-server-links a::after {
+    .hide-gv {
       position-anchor: var(--link-anchor);
       inset: auto;
       top: anchor(bottom);
@@ -904,22 +759,9 @@ html:has(#links-icon-toggle:checked) {
       margin-block-start: 0.35rem;
     }
 
-    a.link:is(:hover, :focus-visible) .hide-gv,
-    .secure-server-links a:is(:hover, :focus-visible)::after {
+    a.link:is(:hover, :focus-visible) .hide-gv {
       transform: translate(-50%, 0);
     }
-  }
-}
-
-.secure-server-links {
-  ul {
-    max-width: 100%;
-  }
-}
-
-#install-button {
-  &[hidden] {
-    display: none !important;
   }
 }
 

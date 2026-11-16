@@ -1,8 +1,13 @@
-const CACHE_NAME = 'x-g-ca-v3';
+const CACHE_NAME = 'x-g-ca-v4';
 const PRECACHE_URLS = [
   '/',
   '/css/styles.css',
   '/js/script.js',
+  '/site.webmanifest',
+  '/img/pwa/icon-192.png',
+  '/img/pwa/icon-512.png',
+  '/img/pwa/icon-monochrome-512.png',
+  '/img/pwa/apple-touch-icon.png',
   '/img/x-g_favicon_light.svg',
   '/img/x-g_favicon_dark.svg',
   '/img/link_ascii.webp',
@@ -33,7 +38,10 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
   const isFreshAsset = url.origin === self.location.origin
-    && (url.pathname.startsWith('/css/') || url.pathname.startsWith('/js/'));
+    && (event.request.mode === 'navigate'
+      || url.pathname === '/site.webmanifest'
+      || url.pathname.startsWith('/css/')
+      || url.pathname.startsWith('/js/'));
 
   if (isFreshAsset) {
     event.respondWith(

@@ -1,16 +1,12 @@
 (() => {
   'use strict';
 
-  const CRYPTO_JS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js';
-  const encryptedserverHTML = 'U2FsdGVkX1/+nMGEnBSLeT8piwEZ6TJqYQpzRYvI+8WbtmzjO0Lgtbd5Ty6Bp1Izs8hGO4N7Uc5E5HWWEJnXWVaKoA/dEZTQ44tS4UyIDzZk9wVBWYA5F9HGL5Y4GipbR5cwaAaMaoL/xvjyTDsfw+NGXjAwwXtmV6T3JsFGLzexpKvfFpbspqzT08oXEgj4vMf6hIVBm0vov9ERQ2/ph4nQB2XkYZTqNZVsNhlLKfhVgk4hMVEOF1Psbw9E8RrWdAm8PAPZPTB47jF63iB7AJ24EhRYpbWdobzq//7sCqtmG8pL6tQuJw+Fnbd8sc9N08/+Jg0QNTHn/5nPTbrYUwrEj21CqKpk63R4WuE1Xt1UcBaysVRaO5al97Co+Wp6nLnO3b2oxhNLqmTSrFK2/Nd0tKE5yoiX8n2nv48amHb5m+mBWyilnh4UC04Cw32MsFUE5Z16too7Jx8u/VmP8O/Ec5YSYWbdsktD8Ne3YbdSYqiDIh6U2O6X1aLddHIyx367NrNDaKQ3DHiAoPdimzL2cf7i6lxg7HrA2o0NjIuHSC1H3NjQEvylTNAt60/Q6n3HWZ5m244MhkQ6Cr8TbOPnNLY+GnLs0WUKlgLDfiN+damP6VsKs1uVdK9TzMfVC7fKSGNbcRwk7dkT+OmrPSWaT0AiUB+rKD6OWic/XbOBAdf0/iLdnSzCfD8/pey6w/w2CnNWrLH8A0DhXwJ7Oi7xlG3xKpjPzQFlLt2Bf6M2j/jPBweb6Tloy92ceydaFFc1f4X7ElWMC7kAKXDpjgHOC3iL+GlirZxpDSwWvnyDDRb5gU3AcSJVeYsdHma9ZfIj6pso64/ELsypPt1TeBj+qAAFGYvQq107TFAxB8ToOyiNGl2hPVYaHDsjtKadO/c0XYEqQG4fPMYgU664tzK8f6+Lwb+ymnrdldGZ/+WhNez4WxfL8Pj4xAl8yZLi7SXaahoA54XjCu88E6czOO7jmSVKwYfSoJEcwlPSiqfp/yMMl9nKJAL+kXXd6ISJf2swz7ndfmsurUDuhAKIJB8ayQxnfY8x5R2futSSUTpwY+Buf6Gfv+SuH+nFVaug3hJlOqQTT9ewZ7CVlT6o26ZR6hxPQBUzdnjXr1ihjMXESAMJUlseUCgNDEUCusfk2Cfuqnokgwf6Ly0Qz/bfbDOwAHxqmAlgB4fbhcq9oQuoBexfZOCcChlvIdcP2RXnh/hlG2xl7CH3POSWiLiIlXkqqPr1qbDqtrACpqkdOkctFyKySQu3I90EBNfjIZCNu4NbTnEYHMvjW/oA7notjOXvT/IChAgMJTGxoUgVHgvXefXLO3BuhpeJq/Ru0aOR+iI5kXSMvwmpCK3ILXuvAxRj5zUF9LihdeLmX0WOfX2FDxAsR4Fu6w42dmyUiycj1srQb6b/t7MxmeuI09jF0FHknmGfFv0ehQvj40IEYN8=';
-
   document.addEventListener('DOMContentLoaded', () => {
     updateCurrentYear();
     updateFavicon();
     initFaviconWatcher();
+    initThemeColor();
     registerServiceWorker();
-    initInstallPrompt();
-    initSecureServerLinks();
     initLinkLayoutToggle();
   });
 
@@ -39,128 +35,20 @@
     });
   }
 
-  function initInstallPrompt() {
-    let deferredPrompt = null;
-    let installButton = null;
+  function initThemeColor() {
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (!themeColor) return;
 
-    window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();
-      deferredPrompt = event;
-      installButton = installButton || createInstallButton();
-      installButton.hidden = false;
-    });
+    // Read the active CSS token so the status bar follows both theme controls.
+    const updateThemeColor = () => {
+      themeColor.content = getComputedStyle(document.documentElement)
+        .getPropertyValue('--color-bg').trim();
+    };
 
-    window.addEventListener('appinstalled', () => {
-      deferredPrompt = null;
-      if (installButton) installButton.hidden = true;
-    });
-
-    function createInstallButton() {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.id = 'install-button';
-      button.textContent = 'Install App';
-      button.hidden = true;
-      button.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        button.hidden = true;
-      });
-      document.body.appendChild(button);
-      return button;
-    }
-  }
-
-  // function loadCryptoJS() {
-  //   if (window.CryptoJS) return Promise.resolve(window.CryptoJS);
-
-  //   return new Promise((resolve, reject) => {
-  //     const script = document.createElement('script');
-  //     script.src = CRYPTO_JS_URL;
-  //     script.async = true;
-  //     script.crossOrigin = 'anonymous';
-  //     script.onload = () => resolve(window.CryptoJS);
-  //     script.onerror = reject;
-  //     document.head.appendChild(script);
-  //   });
-  // }
-
-  // function initSecureServerLinks() {
-  //   const loginBtn = document.getElementById('server-login-btn');
-  //   const secureContainer = document.getElementById('secure-server-links');
-  //   const secureWrapper = document.getElementById('serverlist-wrapper');
-  //   if (!loginBtn || !secureContainer) return;
-
-  //   loginBtn.addEventListener('click', async () => {
-  //     if (loginBtn.classList.contains('is-unlocked')) {
-  //       secureContainer.innerHTML = '';
-  //       if (secureWrapper) secureWrapper.hidden = true;
-  //       loginBtn.classList.remove('is-unlocked');
-  //       loginBtn.setAttribute('aria-label', 'Unlock server links');
-  //       loginBtn.setAttribute('aria-expanded', 'false');
-  //       return;
-  //     }
-
-  //     const password = prompt('Enter the password to view server links:');
-  //     if (!password) return;
-
-  //     loginBtn.disabled = true;
-
-  //     try {
-  //       const CryptoJS = await loadCryptoJS();
-  //       const bytes = CryptoJS.AES.decrypt(encryptedserverHTML, password);
-  //       const decryptedHTML = bytes.toString(CryptoJS.enc.Utf8);
-
-  //       if (!decryptedHTML) throw new Error('Invalid password');
-
-  //       secureContainer.innerHTML = decryptedHTML;
-  //       normalizeSecureServerLinks(secureContainer);
-  //       if (secureWrapper) secureWrapper.hidden = false;
-  //       loginBtn.disabled = false;
-  //       loginBtn.classList.add('is-unlocked');
-  //       loginBtn.setAttribute('aria-label', 'Server links unlocked');
-  //       loginBtn.setAttribute('aria-expanded', 'true');
-  //     } catch {
-  //       alert('Incorrect password.');
-  //       loginBtn.disabled = false;
-  //     }
-  //   });
-  // }
-
-  // function normalizeSecureServerLinks(container) {
-  //   container.querySelectorAll('ul').forEach((list) => {
-  //     list.classList.add('link-list');
-  //   });
-
-  //   container.querySelectorAll('li').forEach((item) => {
-  //     item.classList.add('link-list__item');
-  //   });
-
-  //   container.querySelectorAll('a').forEach((link, index) => {
-  //     const linkNumber = index + 1;
-
-  //     link.classList.add('link');
-  //     link.style.setProperty('--link-anchor', `--server-link-${linkNumber}`);
-  //     link.querySelectorAll('img').forEach((image) => {
-  //       image.classList.add('link__icon');
-  //     });
-
-  //     if (!link.dataset.iconLabel) {
-  //       link.dataset.iconLabel = getIconLabel(link, linkNumber);
-  //     }
-  //   });
-  // }
-
-  function getIconLabel(link, fallbackNumber) {
-    const clone = link.cloneNode(true);
-    clone.querySelectorAll('.link__description, p, small').forEach((node) => node.remove());
-
-    return clone.textContent.replace(/\s+/g, ' ').trim()
-      || link.getAttribute('aria-label')
-      || link.getAttribute('title')
-      || `Server ${fallbackNumber}`;
+    updateThemeColor();
+    document.getElementById('theme-toggle')?.addEventListener('change', updateThemeColor);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateThemeColor);
+    window.addEventListener('pageshow', updateThemeColor);
   }
 
   function initLinkLayoutToggle() {

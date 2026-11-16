@@ -4,60 +4,28 @@
   "description": "Personal Link Directory",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a1a1a",
-  "theme_color": "#00ff88",
+  "background_color": "#181717",
+  "theme_color": "#181717",
   "orientation": "portrait-primary",
   "categories": ["utilities", "productivity"],
   "icons": [
     {
-      "src": "/img/x-g_favicon_light.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/img/x-g_favicon_light.svg",
+      "src": "/img/pwa/icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/img/x-g_favicon_light.svg",
+      "src": "/img/pwa/icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/img/x-g_favicon_light.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Link Index",
-      "short_name": "Links",
-      "description": "View all available links",
-      "url": "/#links",
-      "icons": [
-        {
-          "src": "/img/x-g_favicon_light.svg",
-          "sizes": "96x96",
-          "type": "image/svg+xml"
-        }
-      ]
-    },
-    {
-      "name": "Games",
-      "short_name": "Games",
-      "description": "Access game downloads and servers",
-      "url": "/#downloads",
-      "icons": [
-        {
-          "src": "/img/x-g_favicon_light.svg",
-          "sizes": "96x96",
-          "type": "image/svg+xml"
-        }
-      ]
+      "src": "/img/pwa/icon-monochrome-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "monochrome"
     }
   ]
 }

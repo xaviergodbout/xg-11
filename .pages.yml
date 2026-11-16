@@ -52,11 +52,6 @@ content:
               extensions: [svg, webp, png, jpg, jpeg]
               rename: safe
 
-          - name: alt
-            label: Icon alt text
-            type: string
-            required: false
-
           - name: label
             label: Link label
             type: string
