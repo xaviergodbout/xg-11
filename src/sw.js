@@ -1,4 +1,4 @@
-const CACHE_NAME = 'x-g-ca-v4';
+const CACHE_NAME = 'x-g-ca-v5';
 const PRECACHE_URLS = [
   '/',
   '/css/styles.css',
