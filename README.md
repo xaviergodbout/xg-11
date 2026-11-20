@@ -10,11 +10,4 @@
 
 The site groups links by category and offers an icon-only view and a light or dark theme. It uses Eleventy and Nunjucks to generate the site, with Pages CMS for content editing.
 
-## Local development
 
-```sh
-npm ci
-npm start
-```
-
-Run `npm run build` to generate the static site. Look in [`src/`](./src/) for the source and [`.pages.yml`](./.pages.yml) for the Pages CMS configuration.
